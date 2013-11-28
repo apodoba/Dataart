@@ -6,8 +6,7 @@
 *.iml
 .idea
 .metadata
-*/target/*
-*/bin/*
+target/
 
 #GIT #
 ######
