@@ -38,9 +38,6 @@
 		<appender-ref ref="console" />
 	</root>
 	
-	<!--org.hibernate.SQL logger-->
-    <logger name="org.hibernate">
-        <level value="info"/>
-    </logger>
+
 	
 </log4j:configuration>

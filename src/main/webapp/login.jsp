@@ -24,14 +24,6 @@
 		<td align="right"><spring:message code="label.password" /></td>
 		<td><input type="password" name="j_password" /></td>
 	</tr>
-	<tr>
-		<td align="right"><spring:message code="label.remember" /></td>
-		<td><input type="checkbox" name="_spring_security_remember_me" /></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="right"><input type="submit" value="Login" />
-		<input type="reset" value="Reset" /></td>
-	</tr>
 </table>
 </form>
 </body>
