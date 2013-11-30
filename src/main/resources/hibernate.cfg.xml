@@ -5,8 +5,10 @@
         <mapping class="com.dataart.domain.Contact"/>
         <mapping class="com.dataart.domain.User"/>
         <mapping class="com.dataart.domain.Role"/>
-        <mapping class="com.dataart.domain.Account"/>
         <mapping class="com.dataart.domain.CurrencyType"/>
+        <mapping class="com.dataart.domain.Account"/>
         <mapping class="com.dataart.domain.Service"/>
+        <mapping class="com.dataart.domain.TransactionType"/>
+        <mapping class="com.dataart.domain.Transaction"/>
     </session-factory>
 </hibernate-configuration>

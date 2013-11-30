@@ -19,10 +19,10 @@
  
 		   users-by-username-query="
 		      select username,password, enabled 
-		      from users where username=?" 
+		      from USERS where username=?" 
  
 		   authorities-by-username-query="
-		      select u.username, ur.role from users u, user_roles ur 
+		      select u.username, ur.role from USERS u, USER_ROLES ur 
 		      where u.user_id = ur.user_id and u.username =?  " 
  
 		/>
