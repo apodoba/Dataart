@@ -42,4 +42,9 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+    
+    public User getUserByID(int id){
+    	return (User) sessionFactory.getCurrentSession().get(User.class, id); 
+    }
 }

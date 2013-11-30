@@ -24,6 +24,9 @@ public class Account {
 
 	@Column(name = "NAME")
 	private String name;
+	
+	@Column(name = "BALANCE")
+	private Double balance;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
@@ -65,5 +68,21 @@ public class Account {
 
 	public void setCurrencyType(CurrencyType currencyType) {
 		this.currencyType = currencyType;
+	}
+
+	public Double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 }

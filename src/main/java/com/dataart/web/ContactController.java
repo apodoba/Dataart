@@ -14,6 +14,7 @@ import com.dataart.domain.Contact;
 import com.dataart.service.ContactService;
 
 @Controller
+@RequestMapping("/contacts")
 public class ContactController {
 
     @Autowired

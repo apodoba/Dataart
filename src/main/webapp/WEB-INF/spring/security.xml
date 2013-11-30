@@ -4,8 +4,10 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 	<http access-denied-page="/error403.jsp">
 		<intercept-url pattern="/index*" access="ROLE_USER,ROLE_ADMIN" />
-		<intercept-url pattern="/add*" access="ROLE_USER" />
-		<intercept-url pattern="/delete/*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/AddUser" access="ROLE_ADMIN" />
+		<intercept-url pattern="/ListUsers" access="ROLE_ADMIN" />
+		<intercept-url pattern="/Profile" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/DeleteUser/*" access="ROLE_ADMIN" />
 		<form-login login-page="/login.jsp" default-target-url="/index"
 			authentication-failure-url="/login.jsp?error=true" />
 		<logout logout-url="/logout" logout-success-url="/index" />
@@ -14,19 +16,17 @@
 	</http>
 
 	<authentication-manager>
-	   <authentication-provider>
-		<jdbc-user-service data-source-ref="dataSource"
- 
-		   users-by-username-query="
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="dataSource"
+
+				users-by-username-query="
 		      select username,password, enabled 
-		      from USERS where username=?" 
- 
-		   authorities-by-username-query="
+		      from USERS where username=?"
+
+				authorities-by-username-query="
 		      select u.username, ur.role from USERS u, USER_ROLES ur 
-		      where u.user_id = ur.user_id and u.username =?  " 
- 
-		/>
-	   </authentication-provider>
+		      where u.user_id = ur.user_id and u.username =?  " />
+		</authentication-provider>
 	</authentication-manager>
 
 

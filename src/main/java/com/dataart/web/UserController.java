@@ -19,6 +19,11 @@ public class UserController {
     @Autowired
     private UserService userService;
     
+    @RequestMapping("/index")
+    public String listContacts(Map<String, Object> map) {
+        return "contact";
+    }
+    
     @RequestMapping("/")
     public String home() {
         return "redirect:/index";
