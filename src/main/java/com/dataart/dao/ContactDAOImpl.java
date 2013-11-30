@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dataart.domain.Contact;
+import com.dataart.domain.User;
 
 @Repository
 public class ContactDAOImpl implements ContactDAO {
@@ -31,6 +32,9 @@ public class ContactDAOImpl implements ContactDAO {
         if (null != contact) {
             sessionFactory.getCurrentSession().delete(contact);
         }
-
+    }
+    
+    public User getUserByID(int id){
+    	return (User) sessionFactory.getCurrentSession().get(User.class, id); 
     }
 }
