@@ -31,6 +31,9 @@ public class User {
 	@Column(name = "PHONE")
 	private String phone;
 	
+	@Column(name = "EMAIL")
+	private String email;
+	
 	@Column(name = "FULL_NAME")
 	private String fullName;
 	
