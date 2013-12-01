@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.dataart.domain.Transaction;
 
+@Repository
 public class TransactionDAOImpl implements TransactionDAO {
 
 	@Autowired
@@ -19,8 +21,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 
 	@Override
 	public void saveTransaction(Transaction transaction) {
-		// TODO Auto-generated method stub
-
+		sessionFactory.getCurrentSession().save(transaction);
 	}
 
 }

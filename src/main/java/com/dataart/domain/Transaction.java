@@ -2,7 +2,6 @@ package com.dataart.domain;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,15 +21,13 @@ public class Transaction {
 	@GeneratedValue
 	private Integer id;
 
-	@Column(name = "NAME")
-	private String name;
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACCOUNT_ID", nullable = false)
 	private Account account;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	public TransactionType transactionType;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "TRANSACTION_TYPE_ID", nullable = false)
+	public TransactionType transactionType; 
 
 	@Column(name = "AMOUNT")
 	private Double amount;
@@ -45,14 +42,6 @@ public class Transaction {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Account getAccount() {

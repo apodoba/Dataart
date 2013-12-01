@@ -33,7 +33,7 @@ public class Account {
 	@PrimaryKeyJoinColumn
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CURRENCY_TYPE_ID", nullable = false)
 	public CurrencyType currencyType; 
 	

@@ -35,7 +35,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getProfile(User user) {
 		return userDAO.getProfile(user);
-
 	}
 	
 	@Override
