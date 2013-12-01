@@ -2,8 +2,10 @@ package com.dataart.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -43,8 +45,10 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 	
-    
-    public User getUserByID(int id){
-    	return (User) sessionFactory.getCurrentSession().get(User.class, id); 
+	@Override
+    public User getUserByName(String userName){
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("userName", userName));
+		return  (User) criteria.uniqueResult();
     }
 }

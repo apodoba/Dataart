@@ -14,4 +14,6 @@ public interface UserService {
 
 	public User getProfile(User user);
 	
+	public User getLoginUser(String userName);
+	
 }

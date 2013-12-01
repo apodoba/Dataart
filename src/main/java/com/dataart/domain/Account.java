@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -32,7 +33,8 @@ public class Account {
 	@PrimaryKeyJoinColumn
 	private User user;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CURRENCY_TYPE_ID", nullable = false)
 	public CurrencyType currencyType; 
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "account")

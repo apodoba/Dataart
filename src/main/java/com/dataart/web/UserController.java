@@ -3,6 +3,7 @@ package com.dataart.web;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +22,10 @@ public class UserController {
     
     @RequestMapping("/index")
     public String listContacts(Map<String, Object> map) {
-        return "contact";
+    	String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        map.put("user", new User());
+        map.put("userProfile", userService.getLoginUser(userName));
+        return "user";
     }
     
     @RequestMapping("/")
@@ -31,6 +35,8 @@ public class UserController {
     
     @RequestMapping("/Profile")
     public String UserProfile(Map<String, Object> map) {
+    	Object object = SecurityContextHolder.getContext().getAuthentication().getDetails();
+    	System.out.println("OBJECT " + object);
         /*map.put("user", new User());*/
         /* map.put("userProfile", userService.getProfile(User.getId()));*/
         return "user";

@@ -13,13 +13,13 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override
 	public void decreaseBalance(Account account,double count) {
 		account.setBalance(account.getBalance()-count);
-		sessionFactory.getCurrentSession().update(account);
+		sessionFactory.getCurrentSession().merge(account);
 	}
 
 	@Override
 	public void increaseBalance(Account account,double count) {
 		account.setBalance(account.getBalance()+count);
-		sessionFactory.getCurrentSession().update(account);
+		sessionFactory.getCurrentSession().merge(account);
 	}
 
 }

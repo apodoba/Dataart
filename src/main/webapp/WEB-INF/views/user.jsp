@@ -20,15 +20,19 @@
 	<table class="data">
 		<tr>
 			<td><spring:message code="label.fullname" />
-			</td><td>${user.fullname}</td>
+			</td><td>${userProfile.getFullName()}</td>
+		</tr>
+		<tr>
+			<td><spring:message code="label.username" />
+			</td><td>${userProfile.getUserName()}</td>
 		</tr>
 		<tr>
 			<td><spring:message code="label.email" /></td>
-			<td>${user.email}</td>
+			<td>${userProfile.getEmail()}</td>
 		</tr>
 		<tr>
 			<td><spring:message code="label.telephone" />
-			</td><td>${user.telephone}</td>
+			</td><td>${userProfile. getPhone()}</td>
 		</tr>
 	</table>
 </c:if>
