@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Language" content="ru">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://fonts.googleapis.com/css?family=family=Open+Sans:400,700,300|Comfortaa&amp;subset=all" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      html {font-size: 95%;}
+      @media all and (min-resolution: 120dpi) {html, x:-moz-any-link {font-size: 68.75%;}}
+      body,html {margin: 0px; padding: 0px; font-family: open sans, sans}
+      #header {background-color: #ececec;  width: 100%; padding: 10px 0px;}
+      .button {float: left; text-align: center; margin: 0px 25px; height: 100%;}
+      .button:hover{opacity: 0.6}
+      #exit {position: absolute; right: 30px; height: auto;}
+      #login_container {width: 250px; height: 250px; position: absolute; top: 50%; margin-top: -175px; left: 50%; margin-left: -175px; padding: 15px;}
+      #login_container form { background-color: lightgrey; text-align: center; color: grey;}
+      #login_container input { border: none; outline: none; height: 2em; text-align: center; margin: 5px;}
+      /* <!-- to fix header height --> */
+      #header:before,
+      #header:after {
+      content:"";
+      display:table;
+      }
+      #header:after {
+      clear:both;
+      }
+      #header {
+      zoom:1;
+      }
+    </style>
+    <title>TeamBanking Login</title>
+  </head>
+  <body>
+    <div id="header">
+      <div class="button">
+	<img src="images/logo_small.png">
+      </div>
+      <div class="button">
+	<img src="images/transfer.png"><br>
+	Переводы
+      </div>
+      <div class="button">
+	<img src="images/communal.png"><br>
+	Коммуналка
+      </div>
+      <div class="button">
+	<img src="images/mobile.png"><br>
+	Мобильный
+      </div>
+      <div class="button">
+	<img src="images/card.png"><br>
+	Карта и счет
+      </div>
+      <div class="button" id="exit">
+	<img src="images/exit.png"><br>
+	Выход
+      </div>
+    </div class="button">
+    <div id="body">
+      <div id="login_container">
+	<form action="" method="POST">
+	  <img src="images/logo_big.png"><br><br>
+	  Login<br>
+	  <input type="text">
+	  <br>
+	  Password<br>
+	  <input type="password"><br>
+	  <input type="submit" value="Вход">
+	  <br><br>
+	</form>
+      </div>
+    </div>
+  </body>
+</html>
