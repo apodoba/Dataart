@@ -9,7 +9,7 @@
       @media all and (min-resolution: 120dpi) {html, x:-moz-any-link {font-size: 68.75%;}}
       body,html {margin: 0px; padding: 0px; font-family: open sans, sans}
       #logo {margin: 30px 15px;}
-      #menu {position: fixed; top: 0px; left 0px; width: auto; height: 100%; background-color: #ececec;}
+      #menu {position: relative; float: left; top: 0px; left 0px; width: auto; height: 100%; background-color: #ececec;}
       .button {margin: 30px 15px; width: 100%;}
       .button:hover{opacity: 0.8;}
       .button img {height: 35px;}
@@ -17,6 +17,9 @@
       #login_container {width: 250px; height: 250px; position: absolute; top: 50%; margin-top: -175px; left: 50%; margin-left: -175px; padding: 15px;}
       #login_container form { background-color: lightgrey; text-align: center; color: grey;}
       #login_container input { border: none; outline: none; height: 2em; text-align: center; margin: 5px;}
+      #container {position: relative; float: left; left: 20px; top: 50px; padding: 30px; min-width: 50%;}
+      .section {display: none; position: absolute; top: 0px; left: 0px; background-color: #ececec; padding: 30px;}
+      thead {font-weight: bold;}
       /* <!-- to fix header height --> */
       #menu:before,
       #menu:after {
@@ -30,7 +33,7 @@
       zoom:1;
       }
     </style>
-    <title>TeamBanking Login</title>
+    <title>TeamBanking</title>
   </head>
   <body>
     <div id="menu">
@@ -46,8 +49,8 @@
 	</a>
       </div>
       <div class="button">
-	<a href="#money_transfer">
-	  <img src="images/card.png"><br>Перевести на др. счет
+	<a href="#fill_account">
+	  <img src="images/card.png"><br>Пополнить счет
 	</a>
       </div>
       <div class="button">
@@ -59,19 +62,122 @@
 	<a href="logout.html"><img src="images/exit.png">&nbsp;Выход</a>
       </div>
     </div class="button">
-    <div id="body">
-      <div id="login_container" style="display:none">
-	<form action="" method="POST">
-	  <img src="images/logo_big.png"><br><br>
-	  Login<br>
-	  <input type="text">
-	  <br>
-	  Password<br>
-	  <input type="password"><br>
-	  <input type="submit" value="Вход">
-	  <br><br>
-	</form>
+    <div id="container">
+      <div id="profile" class="section">
+	<h3>Profile</h3>
+	Full name: Vasily Smith<br>
+	Username: vasya<br>
+	E-mail: vasya@example.com<br>
+	Phone: &nbsp; +3801234657<br>
+	<h4>Account id: 1234 4567 9874</h4>
+	<h4>Account balance: 100$</h4>
+	<small>last two are user-only</small>
       </div>
+      <div id="pay_for_services" class="section">
+	<h3>Pay for services</h3>
+	<form method="post" action="">
+	  Тип услуги: &nbsp; <select size="1" name="service_list">
+	    <option>ЖЭК
+	    <option>Свет
+	    <option>Газ
+	    <option>Вода
+	    <option>Дворники
+	  </select><br>
+	  Номер счета: &nbsp;<input type="text" size="10" name="service_account"><br>
+	  Сумма: &nbsp;<input type="text" size="10" name="service_account"><br>
+	  <input type="submit" value="Submit"><br>
+	  </form>
+      </div>
+      <div id="money_transfer" class="section">
+	<h3>Money transfer</h3>
+	<form method="post" action="">
+	  Номер счета: &nbsp;<input type="text" size="10" name="service_account"><br>
+	  Сумма: &nbsp;<input type="text" size="10" name="service_account"><br>
+	  <input type="submit" value="Submit"><br>
+	  </form>
+      </div>
+      <div id="transactions" class="section"    style="display:block">
+	<h3>Transactions list</h3>
+	<div style="min-width: 600px; overflow:auto;">
+	  <table width="100%">
+	    <thead>
+	      <td>Date</td>
+	      <td>Sum</td>
+	      <td>Description</td>
+	      <td>Type</td>
+	    </thead>
+	    <tr>
+	      <td>10.12.13 13:18:22</td>
+	      <td>20$</td>
+	      <td>ЖЭК</td>
+	      <td>оплата услуг</td>
+	    </tr>
+	    <tr>
+	      <td>10.12.13 13:18:22</td>
+	      <td>20$</td>
+	      <td>ЖЭК</td>
+	      <td>оплата услуг</td>
+	    </tr>
+	    <tr>
+	      <td>10.12.13 13:18:22</td>
+	      <td>20$</td>
+	      <td>ЖЭК</td>
+	      <td>оплата услуг</td>
+	    </tr>
+	    <tr>
+	      <td>10.12.13 13:18:22</td>
+	      <td>20$</td>
+	      <td>ЖЭК</td>
+	      <td>оплата услуг</td>
+	    </tr>
+	    <tr>
+	      <td>10.12.13 13:18:22</td>
+	      <td>20$</td>
+	      <td>ЖЭК</td>
+	      <td>оплата услуг</td>
+	    </tr>
+	    <tr>
+	      <td>10.12.13 13:18:22</td>
+	      <td>20$</td>
+	      <td>ЖЭК</td>
+	      <td>оплата услуг</td>
+	    </tr>
+	    <tr>
+	      <td>10.12.13 13:18:22</td>
+	      <td>20$</td>
+	      <td>ЖЭК</td>
+	      <td>оплата услуг</td>
+	    </tr>
+	    <tr>
+	      <td>10.12.13 13:18:22</td>
+	      <td>20$</td>
+	      <td>ЖЭК</td>
+	      <td>оплата услуг</td>
+	    </tr>
+
+	  </table>
+	</div>
+      </div>
+      <div id="fill_account" class="section">
+	<h4>Fill own account</h4>
+	<form method="post" action="">
+	  Secret code: &nbsp;<input type="text" size="10" name="fill_code"><br>
+	  <input type="submit" value="Submit"><br>
+	  </form>
+      </div>
+
+    </div>
+    <div id="login_container" style="display:none">
+      <form action="" method="POST">
+	<img src="images/logo_big.png"><br><br>
+	Login<br>
+	<input type="text">
+	<br>
+	Password<br>
+	<input type="password"><br>
+	<input type="submit" value="Вход">
+	<br><br>
+      </form>
     </div>
   </body>
 </html>
