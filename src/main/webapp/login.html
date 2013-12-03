@@ -8,56 +8,59 @@
       html {font-size: 95%;}
       @media all and (min-resolution: 120dpi) {html, x:-moz-any-link {font-size: 68.75%;}}
       body,html {margin: 0px; padding: 0px; font-family: open sans, sans}
-      #header {background-color: #ececec;  width: 100%; padding: 10px 0px;}
-      .button {float: left; text-align: center; margin: 0px 25px; height: 100%;}
-      .button:hover{opacity: 0.6}
-      #exit {position: absolute; right: 30px; height: auto;}
+      #logo {margin: 30px 15px;}
+      #menu {position: fixed; top: 0px; left 0px; width: auto; height: 100%; background-color: #ececec;}
+      .button {margin: 30px 15px; width: 100%;}
+      .button:hover{opacity: 0.8;}
+      .button img {height: 35px;}
+      .button A { display: block; width: 100%; height: 100%; color: black; text-decoration: none;}
       #login_container {width: 250px; height: 250px; position: absolute; top: 50%; margin-top: -175px; left: 50%; margin-left: -175px; padding: 15px;}
       #login_container form { background-color: lightgrey; text-align: center; color: grey;}
       #login_container input { border: none; outline: none; height: 2em; text-align: center; margin: 5px;}
       /* <!-- to fix header height --> */
-      #header:before,
-      #header:after {
+      #menu:before,
+      #menu:after {
       content:"";
       display:table;
       }
-      #header:after {
+      #menu:after {
       clear:both;
       }
-      #header {
+      #menu {
       zoom:1;
       }
     </style>
     <title>TeamBanking Login</title>
   </head>
   <body>
-    <div id="header">
+    <div id="menu">
+      <img id="logo" src="images/logo_small.png">
       <div class="button">
-	<img src="images/logo_small.png">
+	<a href="#profile">
+	  <img src="images/profile.png"><br>Профиль
+	</a>
       </div>
       <div class="button">
-	<img src="images/transfer.png"><br>
-	Переводы
+	<a href="#pay_for_services">
+	  <img src="images/communal.png"><br>Оплатить услуги
+	</a>
       </div>
       <div class="button">
-	<img src="images/communal.png"><br>
-	Коммуналка
+	<a href="#money_transfer">
+	  <img src="images/card.png"><br>Перевести на др. счет
+	</a>
       </div>
       <div class="button">
-	<img src="images/mobile.png"><br>
-	Мобильный
-      </div>
-      <div class="button">
-	<img src="images/card.png"><br>
-	Карта и счет
+	<a href="#transactions">
+	  <img src="images/transactions.png"><br>Журнал транзакций
+	</a>
       </div>
       <div class="button" id="exit">
-	<img src="images/exit.png"><br>
-	Выход
+	<a href="logout.html"><img src="images/exit.png">&nbsp;Выход</a>
       </div>
     </div class="button">
     <div id="body">
-      <div id="login_container">
+      <div id="login_container" style="display:none">
 	<form action="" method="POST">
 	  <img src="images/logo_big.png"><br><br>
 	  Login<br>
