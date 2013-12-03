@@ -45,10 +45,10 @@
 	<a href="<c:url value="/logout" />"> <spring:message
 			code="label.logout" /></a>
 
-	<a href="<c:url value="/payments/service.jsp" />"> 
+	<a href="<c:url value="/payment/service" />"> 
 	   <spring:message code="label.PaymentService" />
 	</a>
-	<a href="<c:url value="payments/account.jsp" />"> 
+	<a href="<c:url value="/payment/account" />"> 
 		<spring:message code="label.PaymentHuman" />
 	</a>
 </body>

@@ -2,17 +2,14 @@ package com.dataart.service;
 
 import java.util.List;
 
-import com.dataart.domain.Account;
 import com.dataart.domain.User;
 
 public interface UserService {
 
 	public List<User> listUsers();
+
+	public User getLoginUser();
 	
-	/*public void addUser(User user);
-
-	public void removeUser(Integer id);*/
-
-	public User getLoginUser(String userName);
+	public List<User> listSimpleUsers();
 		
 }

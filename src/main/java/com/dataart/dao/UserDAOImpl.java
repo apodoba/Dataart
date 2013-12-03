@@ -9,7 +9,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.dataart.domain.Account;
 import com.dataart.domain.User;
 
 @Repository
@@ -23,19 +22,12 @@ public class UserDAOImpl implements UserDAO {
     public List<User> listUsers() {
         return sessionFactory.getCurrentSession().createQuery("from Users").list();
     }
-
-/*    
-    public void addUser(User user) {
-        sessionFactory.getCurrentSession().save(user);
+    
+    @SuppressWarnings("unchecked")
+	public List<User> listUsersForRole(String role) {
+    	Query query = sessionFactory.getCurrentSession().createQuery("from User u join u.role as r where r.role=:roleName").setParameter("roleName", role);
+    	return query.list();
     }
-
-    public void removeUser(Integer id) {
-        User user = (User) sessionFactory.getCurrentSession().load(User.class, id);
-        if (null != user) {
-            sessionFactory.getCurrentSession().delete(user);
-        }
-    }
-*/
 	
 	@Override
     public User getUserByName(String userName){

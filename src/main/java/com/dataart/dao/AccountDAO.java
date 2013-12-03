@@ -8,6 +8,6 @@ public interface AccountDAO {
 	
 	public void increaseBalance(Account account,double count);
 	
-	public Account getAccountByName(String userName);
+	public Account getAccountByName(String accountName);
 	
 }

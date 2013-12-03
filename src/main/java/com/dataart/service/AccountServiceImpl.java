@@ -6,12 +6,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dataart.dao.AccountDAO;
 import com.dataart.domain.Account;
+import com.dataart.domain.User;
+import com.dataart.enums.TransactionsTypeEnum;
 
 @Service
 public class AccountServiceImpl implements AccountService{
 	
 	@Autowired
     private AccountDAO accountDAO;
+	
+	@Autowired
+    private TransactionService transactionService;
 	
 	@Override
 	@Transactional
@@ -31,5 +36,18 @@ public class AccountServiceImpl implements AccountService{
 		return accountDAO.getAccountByName(accountName);
 	}
 	
+	@Override
+	@Transactional
+	public void payForService(User loginUser, double money){
+		decreaseBalance(loginUser.getAccount(), money);
+		transactionService.saveTransactionWithType(TransactionsTypeEnum.SERVICE_PAYMENT.toString(), money, loginUser.getAccount());
+	}
 	
+	@Override
+	@Transactional
+	public void payForAccount(User loginUser, String accountForPay, double money){
+		increaseBalance(accountDAO.getAccountByName(accountForPay), money);
+		decreaseBalance(loginUser.getAccount(), money);
+		transactionService.saveTransactionWithType(TransactionsTypeEnum.HUMAN_PAYMENT.toString(), money, loginUser.getAccount());
+	}
 }
