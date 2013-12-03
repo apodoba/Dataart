@@ -3,11 +3,6 @@ GRANT usage ON *.* TO dataart@localhost identified BY '1234';
 CREATE DATABASE IF NOT EXISTS bank;
 GRANT ALL privileges ON bank.* TO dataart@localhost;
 USE bank;
-CREATE TABLE `TRANSACTION_TYPES` (
-  `ID` int(10) unsigned NOT NULL,
-  `NAME` varchar(45) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `USERS` (
   `USER_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -70,16 +65,6 @@ CONSTRAINT FK_account FOREIGN KEY (`ACCOUNT_ID`) REFERENCES ACCOUNTS (`ID`),
 KEY FK_transacton_type (`TRANSACTION_TYPE_ID`), 
 CONSTRAINT FK_transacton_type FOREIGN KEY (`TRANSACTION_TYPE_ID`) REFERENCES TRANSACTION_TYPE (`ID`) ) 
 ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE CONTACTS
-  (
-     id        INT PRIMARY KEY AUTO_INCREMENT,
-     firstname VARCHAR(30),
-     lastname  VARCHAR(30),
-     telephone VARCHAR(15),
-     email     VARCHAR(30),
-     created   TIMESTAMP DEFAULT NOW()
-  ); 
 
 INSERT INTO users (USER_ID, USERNAME,PASSWORD, ENABLED, PHONE, FULL_NAME)
 VALUES (100, 'admin', '123456', TRUE, '09377854235', 'петров');

@@ -2,7 +2,6 @@
 <!DOCTYPE hibernate-configuration SYSTEM "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <mapping class="com.dataart.domain.Contact"/>
         <mapping class="com.dataart.domain.User"/>
         <mapping class="com.dataart.domain.Role"/>
         <mapping class="com.dataart.domain.CurrencyType"/>

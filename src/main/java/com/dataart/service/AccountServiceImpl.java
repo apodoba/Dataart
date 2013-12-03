@@ -12,7 +12,7 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Autowired
     private AccountDAO accountDAO;
-
+	
 	@Override
 	@Transactional
 	public void decreaseBalance(Account account, double count) {
@@ -25,4 +25,11 @@ public class AccountServiceImpl implements AccountService{
 		accountDAO.increaseBalance(account, count);
 	}
 
+	@Override
+	@Transactional
+	public Account getAccount(String accountName) {
+		return accountDAO.getAccountByName(accountName);
+	}
+	
+	
 }

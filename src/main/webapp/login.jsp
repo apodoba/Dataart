@@ -7,12 +7,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title><spring:message code="label.title" /></title>
+<title><spring:message code="label.appTitle" /></title>
 </head>
 <body>
 
 	<c:if test="${not empty param.error}">
-		<font color="red"> <spring:message code="label.loginerror" />
+		<font color="red"> <spring:message code="label.loginError" />
 			: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 		</font>
 	</c:if>

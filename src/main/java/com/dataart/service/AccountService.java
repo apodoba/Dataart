@@ -8,4 +8,5 @@ public interface AccountService {
 
 	public void increaseBalance(Account account, double count);
 
+	public Account getAccount(String accountName);
 }

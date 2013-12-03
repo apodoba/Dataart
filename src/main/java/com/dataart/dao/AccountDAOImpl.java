@@ -1,6 +1,8 @@
 package com.dataart.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +25,12 @@ public class AccountDAOImpl implements AccountDAO {
 		account.setBalance(account.getBalance() + count);
 		sessionFactory.getCurrentSession().merge(account);
 	}
+	
+	@Override
+    public Account getAccountByName(String accountName){
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Account.class);
+		criteria.add(Restrictions.eq("accountName", accountName));
+		return  (Account) criteria.uniqueResult();
+    }
 
 }

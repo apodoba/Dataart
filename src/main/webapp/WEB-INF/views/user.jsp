@@ -7,25 +7,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title><spring:message code="label.app_title" /></title>
+<title><spring:message code="label.appTitle" /></title>
 </head>
 <body>
 
-	<%-- <h2><spring:message code="label.welcome_title" />, 
-		 <spring:message code="label.login" />		
-	</h2>--%>
+	<%-- <h2><spring:message code="label.welcomeTitle" /></h2>--%>
 
 	<c:if test="${!empty userProfile}">
+	   <input type="hidden" name="pid" value=${userProfile.getId()} />
 		<h3>
 			<spring:message code="label.profile" />
 		</h3>
 		<table class="data">
 			<tr>
-				<td><spring:message code="label.fullname" /></td>
+				<td><spring:message code="label.fullName" /></td>
 				<td>${userProfile.getFullName()}</td>
 			</tr>
 			<tr>
-				<td><spring:message code="label.username" /></td>
+				<td><spring:message code="label.userName" /></td>
 				<td>${userProfile.getUserName()}</td>
 			</tr>
 			<tr>
@@ -34,80 +33,10 @@
 			</tr>
 			<tr>
 				<td><spring:message code="label.telephone" /></td>
-				<td>${userProfile. getPhone()}</td>
+				<td>${userProfile.getPhone()}</td>
 			</tr>
 		</table>
 	</c:if>
-
-	<c:if test="${!empty userProfile && !empty userAccount}">
-		<h3>
-			<spring:message code="label.account" />
-		</h3>
-		<table class="data">
-			<tr>
-				<td><spring:message code="label.accountNumber" /></td>
-				<td>${userAccount.getName()}</td>
-			</tr>
-			<tr>
-				<td><spring:message code="label.accountBalance" /></td>
-				<td>${userAccount.getBalance()}</td>
-				<td>${userAccount.getCurrencyType().getName()}</td>
-			</tr>
-		</table>
-	</c:if>
-
-	<c:if test="${!empty services}">
-		<h3>
-			<spring:message code="label.service.payment" />
-		</h3>
-		<form:form method="post" action="decreaseBalanceService"
-			commandName="money">
-			<table class="data">
-				<tr>
-					<td><b><spring:message code="label.service" /></b></td>
-					<td><c:set var="selectedService" value="${selectedService}" />
-						<c:set var="selectedFlag" value="${!empty selectedService}" /> <select
-						name=locale>
-							<c:forEach var="lservice" items="${services}">
-								<c:choose>
-									<c:when test="${selectedFlag}">
-										<c:choose>
-											<c:when
-												test="${lservice.getName().equals(selectedService.getName())}">
-												<option selected>${lservice.getName()}</option>
-											</c:when>
-											<c:otherwise>
-												<option>${lservice.getName()}</option>
-											</c:otherwise>
-										</c:choose>
-									</c:when>
-									<c:otherwise>
-										<option>${lservice.getName()}</option>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-					</select></td>
-				</tr>
-				<tr>
-					<td><spring:message code="label.money" /></td>
-					<td><input type="text" style="width: 100px;" name="money" />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit"
-						value="<spring:message code="label.addcontact"/>" /></td>
-				</tr>
-			</table>
-		</form:form>
-
-	</c:if>
-	<c:if test="${userAdmin}">
-		<a href="<c:url value="/allUsers" />"> <spring:message
-				code="label.allUsers" />
-		</a>
-		<br />
-	</c:if>
-
 
 	<br />
 	<br />
@@ -116,6 +45,11 @@
 	<a href="<c:url value="/logout" />"> <spring:message
 			code="label.logout" /></a>
 
-
+	<a href="<c:url value="/payments/service.jsp" />"> 
+	   <spring:message code="label.PaymentService" />
+	</a>
+	<a href="<c:url value="payments/account.jsp" />"> 
+		<spring:message code="label.PaymentHuman" />
+	</a>
 </body>
 </html>
