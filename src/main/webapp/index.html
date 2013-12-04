@@ -5,11 +5,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="http://fonts.googleapis.com/css?family=family=Open+Sans:400,700,300|Comfortaa&amp;subset=all" rel="stylesheet" type="text/css">
     <style type="text/css">
+      /* font size and common tag styles */
       html {font-size: 95%;}
       @media all and (min-resolution: 120dpi) {html, x:-moz-any-link {font-size: 68.75%;}}
       body,html {margin: 0px; padding: 0px; font-family: open sans, sans}
       input,select { border: none; outline: none; margin: 5px; background-color: white}
       h3 {margin:5px 0px}
+      thead {font-weight: bold}
+      thead tr:hover, form tr:hover {background-color: #ececec}
+      table {border-collapse: collapse}
+      tr:hover {background-color: white}
+
+      /* ids and classes */
       #logo {margin: 30px 15px;}
       #menu {position: relative; float: left; top: 0px; left 0px; width: auto; height: 100%; background-color: #ececec;}
       .button {margin: 30px 15px; width: 100%;}
@@ -21,8 +28,8 @@
       #login_container input {text-align: center; height: 2em;}
       #container {position: relative; float: left; left: 20px; top: 20px; padding: 30px; min-width: 50%;}
       .section {display: none; position: absolute; top: 0px; left: 0px; background-color: #ececec; padding: 30px; width: 100%;}
-      thead {font-weight: bold;}
-      /* <!-- to fix header height --> */
+
+      /* fix menu height*/
       #menu:before,
       #menu:after {
       content:"";
