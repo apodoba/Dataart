@@ -35,6 +35,16 @@
       zoom:1;
       }
     </style>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      var hash = window.location.hash.substr(1);
+      if (hash != 0 ) {
+	  obj = document.getElementById(hash);
+      $('#'+hash).fadeIn();
+      }
+    });
+    </script>
     <title>TeamBanking</title>
   </head>
   <body>
