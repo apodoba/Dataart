@@ -1,6 +1,5 @@
 package com.dataart.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dataart.dao.RoleDAO;
 import com.dataart.dao.UserDAO;
-import com.dataart.domain.Role;
 import com.dataart.domain.User;
 
 @Service
@@ -23,7 +21,7 @@ public class UserServiceImpl implements UserService {
 	private RoleDAO roleDAO;
 		
 	private User currentUser;
-	private final static String USER_ROLE = "ROLE_USER";
+//	private final static String USER_ROLE = "ROLE_USER";
 
 	@Transactional
 	public List<User> listUsers() {

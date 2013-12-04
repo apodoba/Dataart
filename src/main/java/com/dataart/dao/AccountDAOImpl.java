@@ -1,5 +1,7 @@
 package com.dataart.dao;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dataart.domain.Account;
+import com.dataart.domain.Transaction;
 
 @Repository
 public class AccountDAOImpl implements AccountDAO {
@@ -31,6 +34,15 @@ public class AccountDAOImpl implements AccountDAO {
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Account.class);
 		criteria.add(Restrictions.eq("name", accountName));
 		return  (Account) criteria.uniqueResult();
+    }
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+    public List<Transaction> getTransactions(Account account){
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Transaction.class);
+		criteria.add(Restrictions.eq("account", account));
+		return  (List<Transaction>) criteria.list();
     }
 
 }

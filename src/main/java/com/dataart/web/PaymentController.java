@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dataart.domain.Service;
-import com.dataart.domain.User;
 import com.dataart.service.AccountService;
 import com.dataart.service.Services;
 import com.dataart.service.TransactionService;
@@ -32,12 +31,13 @@ public class PaymentController {
           
     @RequestMapping("/account")
     public String pagePayForAccount(Map<String, Object> map) {
-    	List<User> allUsers = userService.listUsers();
-		map.put("users", allUsers);
-		if (allUsers != null && !allUsers.isEmpty()) {
-			map.put("selectedUser", allUsers.get(0));
-		}
-        return "account";
+//    	List<User> allUsers = userService.listUsers();
+//		map.put("users", allUsers);
+//		if (allUsers != null && !allUsers.isEmpty()) {
+//			map.put("selectedUser", allUsers.get(0));
+//		}
+    	map.put("payAccount", true);
+        return "user";
     }
     
     @RequestMapping("/service")
@@ -47,7 +47,13 @@ public class PaymentController {
 		if (allServices != null && !allServices.isEmpty()) {
 			map.put("selectedService", allServices.get(0));
 		}
-        return "service";
+        return "user";
+    }
+    
+    @RequestMapping("/increase")
+    public String pagePutMoneyForAccoount(Map<String, Object> map) {
+		map.put("increaseAccount", true);
+        return "user";
     }
 
 }

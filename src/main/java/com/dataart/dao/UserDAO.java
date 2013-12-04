@@ -2,7 +2,6 @@ package com.dataart.dao;
 
 import java.util.List;
 
-import com.dataart.domain.Role;
 import com.dataart.domain.User;
 
 public interface UserDAO {

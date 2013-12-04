@@ -1,6 +1,9 @@
 package com.dataart.service;
 
+import java.util.List;
+
 import com.dataart.domain.Account;
+import com.dataart.domain.Transaction;
 import com.dataart.domain.User;
 
 public interface AccountService {
@@ -14,4 +17,8 @@ public interface AccountService {
 	public void payForService(User loginUser, double money);
 	
 	public void payForAccount(User loginUser, String accountForPay, double money);
+	
+	public void putMoneyForAccount(User loginUser, double money);
+	
+	List<Transaction> getTransactions(Account account);
 }

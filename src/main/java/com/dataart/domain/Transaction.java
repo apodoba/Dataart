@@ -31,6 +31,9 @@ public class Transaction {
 
 	@Column(name = "AMOUNT")
 	private Double amount;
+	
+	@Column(name = "DESCRIPTION")
+	private String description;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "DATE")
@@ -74,6 +77,14 @@ public class Transaction {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

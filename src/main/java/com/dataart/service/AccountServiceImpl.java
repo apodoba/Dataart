@@ -1,11 +1,15 @@
 package com.dataart.service;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dataart.dao.AccountDAO;
 import com.dataart.domain.Account;
+import com.dataart.domain.Transaction;
 import com.dataart.domain.User;
 import com.dataart.enums.TransactionsTypeEnum;
 
@@ -38,6 +42,13 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Override
 	@Transactional
+	public void putMoneyForAccount(User loginUser, double money){
+		increaseBalance(loginUser.getAccount(), money);
+		transactionService.saveTransactionWithType(TransactionsTypeEnum.INCREASE_ACCOUNT_PAYMENT.toString(), money, loginUser.getAccount());
+	}
+	
+	@Override
+	@Transactional
 	public void payForService(User loginUser, double money){
 		decreaseBalance(loginUser.getAccount(), money);
 		transactionService.saveTransactionWithType(TransactionsTypeEnum.SERVICE_PAYMENT.toString(), money, loginUser.getAccount());
@@ -47,12 +58,18 @@ public class AccountServiceImpl implements AccountService{
 	@Transactional
 	public void payForAccount(User loginUser, String accountForPay, double money){
 		Account account = accountDAO.getAccountByName(accountForPay);
-		if(account!=null){
+		if(account!=null && account.getId()!=loginUser.getAccount().getId()){
 			increaseBalance(account, money);
 			decreaseBalance(loginUser.getAccount(), money);
 			transactionService.saveTransactionWithType(TransactionsTypeEnum.HUMAN_PAYMENT.toString(), money,loginUser.getAccount());
 		}else{
 			//TODO send error
 		}
+	}
+	
+	@Override
+	@Transactional
+	public List<Transaction> getTransactions(Account account){
+		return accountDAO.getTransactions(account);
 	}
 }

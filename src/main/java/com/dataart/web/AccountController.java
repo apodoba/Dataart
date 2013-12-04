@@ -1,11 +1,14 @@
 package com.dataart.web;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dataart.domain.Account;
 import com.dataart.service.AccountService;
 import com.dataart.service.TransactionService;
 import com.dataart.service.UserService;
@@ -30,7 +33,7 @@ public class AccountController {
     	}else{
     		//TODO return error
     	}
-        return "redirect:/payment/service";
+        return "user";
     }
     
     @RequestMapping(value = "/moveBalance/Human", method = RequestMethod.POST)
@@ -40,6 +43,26 @@ public class AccountController {
     	}else{
     		//TODO return error
     	}
-        return "redirect:/payment/account";
+        return "user";
+    }
+    
+    @RequestMapping(value = "/increase", method = RequestMethod.POST)
+    public String increaseAccount( @ModelAttribute("money") Double money) {
+    	if(money > 0){
+    		accountService.increaseBalance(userService.getLoginUser().getAccount(), money);
+    	}else{
+    		//TODO return error
+    	}
+        return "user";
+    }
+    
+    @RequestMapping(value = "/transactions")
+    public String getTransactions(Map<String, Object> map) {
+    	Account account = userService.getLoginUser().getAccount();
+    	if(account != null){
+    		map.put("transactions", accountService.getTransactions(account));
+    	}
+    	
+        return "user";
     }
 }
