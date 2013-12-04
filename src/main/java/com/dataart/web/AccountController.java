@@ -33,7 +33,7 @@ public class AccountController {
     	}else{
     		//TODO return error
     	}
-        return "user";
+        return "redirect:/payment/service";
     }
     
     @RequestMapping(value = "/moveBalance/Human", method = RequestMethod.POST)
@@ -43,7 +43,7 @@ public class AccountController {
     	}else{
     		//TODO return error
     	}
-        return "user";
+        return "redirect:/payment/account";
     }
     
     @RequestMapping(value = "/increase", method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class AccountController {
     	}else{
     		//TODO return error
     	}
-        return "user";
+        return "redirect:/payment/increase";
     }
     
     @RequestMapping(value = "/transactions")
