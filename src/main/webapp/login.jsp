@@ -55,8 +55,7 @@
         <spring:message code="label.password" /><br>
         <input type="password" name="j_password"><br>
         <input type="submit" value="Login">
-        <input type="reset" value="Reset" /><br>
-        <input type="checkbox" name="_spring_security_remember_me" /><spring:message code="label.remember" />
+        <input type="reset" value="Reset" />
         <br><br>
       </form>
     </div>
