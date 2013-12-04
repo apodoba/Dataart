@@ -95,34 +95,34 @@
   </head>
   <body>
     <div id="menu">
-      <img id="logo" src="images/logo_small.png">
+      <img id="logo" src="<%= request.getContextPath() %>/images/logo_small.png">
       <div class="button">
         <a href="<c:url value="/index"/>">
-          <img src="images/profile.png"><br>Профиль
+          <img src="<%= request.getContextPath() %>/images/profile.png"><br>Профиль
         </a>
       </div>
       <div class="button">
         <a href="<c:url value="/payment/service"/>">
-          <img src="images/communal.png"><br>Оплатить услуги
+          <img src="<%= request.getContextPath() %>/images/communal.png"><br>Оплатить услуги
         </a>
       </div>
       <div class="button">
         <a href="<c:url value="/payment/account"/>">
-          <img src="images/transfer_money.png"><br>Перевод средств
+          <img src="<%= request.getContextPath() %>/images/transfer_money.png"><br>Перевод средств
         </a>
       </div>
       <div class="button">
         <a href="<c:url value="/payment/increase"/>">
-          <img src="images/fill_account.png"><br>Пополнить счет
+          <img src="<%= request.getContextPath() %>/images/fill_account.png"><br>Пополнить счет
         </a>
       </div>
       <div class="button">
         <a href="<c:url value="/account/transactions"/>">
-          <img src="images/transactions.png"><br>Журнал транзакций
+          <img src="<%= request.getContextPath() %>/images/transactions.png"><br>Журнал транзакций
         </a>
       </div>
       <div class="button" id="exit">
-        <a href="<c:url value="/logout" />"><img src="images/exit.png">&nbsp;Выход</a>
+        <a href="<c:url value="/logout" />"><img src="<%= request.getContextPath() %>/images/exit.png">&nbsp;Выход</a>
       </div>
     </div class="button">
     <div id="container">
@@ -182,7 +182,7 @@
             </tr>
             <tr>
               <td>Номер счета:</td>
-              <td><input type="text" size="15"></td>
+              <td><input type="text" size="15" name="number"></td>
             </tr>
             <tr>
               <td>Сумма:</td>
@@ -223,7 +223,7 @@
             <thead>
               <td>Дата</td>
               <td>Сумма</td>
-              <td>Описание</td>
+              <td>Номер оплаты</td>
               <td>Тип</td>
             </thead>
             <c:forEach items="${transactions}" var="transaction">

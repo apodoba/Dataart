@@ -44,14 +44,14 @@ public class AccountServiceImpl implements AccountService{
 	@Transactional
 	public void putMoneyForAccount(User loginUser, double money){
 		increaseBalance(loginUser.getAccount(), money);
-		transactionService.saveTransactionWithType(TransactionsTypeEnum.INCREASE_ACCOUNT_PAYMENT.toString(), money, loginUser.getAccount());
+		transactionService.saveTransactionWithType(TransactionsTypeEnum.INCREASE_ACCOUNT_PAYMENT.toString(), money, loginUser.getAccount(), null);
 	}
 	
 	@Override
 	@Transactional
-	public void payForService(User loginUser, double money){
+	public void payForService(User loginUser, double money, String numberForPay){
 		decreaseBalance(loginUser.getAccount(), money);
-		transactionService.saveTransactionWithType(TransactionsTypeEnum.SERVICE_PAYMENT.toString(), money, loginUser.getAccount());
+		transactionService.saveTransactionWithType(TransactionsTypeEnum.SERVICE_PAYMENT.toString(), money, loginUser.getAccount(), numberForPay);
 	}
 	
 	@Override
@@ -61,7 +61,7 @@ public class AccountServiceImpl implements AccountService{
 		if(account!=null && account.getId()!=loginUser.getAccount().getId()){
 			increaseBalance(account, money);
 			decreaseBalance(loginUser.getAccount(), money);
-			transactionService.saveTransactionWithType(TransactionsTypeEnum.HUMAN_PAYMENT.toString(), money,loginUser.getAccount());
+			transactionService.saveTransactionWithType(TransactionsTypeEnum.HUMAN_PAYMENT.toString(), money,loginUser.getAccount(), null);
 		}else{
 			//TODO send error
 		}

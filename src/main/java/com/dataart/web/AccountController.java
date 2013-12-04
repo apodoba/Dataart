@@ -27,9 +27,9 @@ public class AccountController {
 	private TransactionService transactionService;
     
     @RequestMapping(value = "/moveBalance/Service", method = RequestMethod.POST)
-    public String moveBalanceToService(@ModelAttribute("money") Double money) {
+    public String moveBalanceToService(@ModelAttribute("money") Double money, @ModelAttribute("number") String number) {
     	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0){
-    		accountService.payForService(userService.getLoginUser(), money);
+    		accountService.payForService(userService.getLoginUser(), money, number);
     	}else{
     		//TODO return error
     	}

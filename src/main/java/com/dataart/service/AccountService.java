@@ -14,7 +14,7 @@ public interface AccountService {
 
 	public Account getAccount(String accountName);
 	
-	public void payForService(User loginUser, double money);
+	public void payForService(User loginUser, double money, String numberForPay);
 	
 	public void payForAccount(User loginUser, String accountForPay, double money);
 	

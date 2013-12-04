@@ -6,5 +6,5 @@ import com.dataart.domain.Transaction;
 public interface TransactionService {
 	
 	public void saveTransaction(Transaction transaction);
-	public void saveTransactionWithType(String type, Double money, Account account);
+	public void saveTransactionWithType(String type, Double money, Account account, String numberForPay);
 }

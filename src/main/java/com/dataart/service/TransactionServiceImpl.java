@@ -29,13 +29,16 @@ public class TransactionServiceImpl implements TransactionService{
 
 	@Override
 	@Transactional
-	public void saveTransactionWithType(String type, Double money, Account account) {
+	public void saveTransactionWithType(String type, Double money, Account account, String numberForPay) {
 		TransactionType transactionType = transactionTypeDAO.getTransactionTypeByName(type);
 		Transaction transaction = new Transaction();
 		transaction.setAccount(account);
 		transaction.setDate(new Date());
 		transaction.setAmount(money);
 		transaction.setTransactionType(transactionType);
+		if(numberForPay != null){
+			transaction.setDescription(numberForPay);
+		}
 		transactionDAO.saveTransaction(transaction);		
 	}
 }

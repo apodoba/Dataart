@@ -42,13 +42,13 @@
   </head>
   <body>
     <div id="login_container">
+     <img src="<%= request.getContextPath() %>/images/logo_big.png"><br><br>
     <c:if test="${not empty param.error}">
 		<font color="red"> <spring:message code="label.loginError" />
 			: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
 		</font>
 	</c:if>
       <form action="<c:url value="/j_spring_security_check" />" method="POST">
-        <img src="images/logo_big.png"><br><br>
         <spring:message code="label.login" /><br>
         <input type="text" name="j_username">
         <br>
