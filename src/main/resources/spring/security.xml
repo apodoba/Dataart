@@ -11,6 +11,8 @@
 		<intercept-url pattern="/account" access="ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/service" access="ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/Delete/*" access="ROLE_ADMIN" />
+		<intercept-url pattern="/payment/*" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/account/*" access="ROLE_USER,ROLE_ADMIN" />
 		<form-login login-page="/login.jsp" default-target-url="/index"
 			authentication-failure-url="/login.jsp?error=true" />
 		<logout logout-url="/logout" logout-success-url="/index" />

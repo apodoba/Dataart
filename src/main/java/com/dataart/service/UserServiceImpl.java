@@ -43,10 +43,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public List<User> listSimpleUsers() {
-		Role role = roleDAO.getRoleByName(USER_ROLE);
-		if(role != null)
-			return userDAO.listUsersForRole(USER_ROLE);
-		return Collections.emptyList();
+//		Role role = roleDAO.getRoleByName(USER_ROLE);
+//		if(role != null)
+			return userDAO.listUsers();
+//		return Collections.emptyList();
 	}
 	
 }

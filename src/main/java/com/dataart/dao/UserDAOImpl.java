@@ -20,12 +20,15 @@ public class UserDAOImpl implements UserDAO {
 
     @SuppressWarnings("unchecked")
     public List<User> listUsers() {
-        return sessionFactory.getCurrentSession().createQuery("from Users").list();
+        return sessionFactory.getCurrentSession().createQuery("from User").list();
     }
     
     @SuppressWarnings("unchecked")
 	public List<User> listUsersForRole(String role) {
-    	Query query = sessionFactory.getCurrentSession().createQuery("from User u join u.role as r where r.role=:roleName").setParameter("roleName", role);
+    	Query query = sessionFactory.getCurrentSession().createQuery("from User u right join u.role as r where r.role=:roleName").setParameter("roleName", role);
+    	
+//    	Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
+//		criteria.add(Restrictions.eq("role", role));
     	return query.list();
     }
 	

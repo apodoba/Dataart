@@ -14,7 +14,7 @@
 		<h3>
 			<spring:message code="label.PaymentService" />
 		</h3>
-		<form:form method="post" action="moveBalance/Service"
+		<form:form method="post" action="/dataart/account/moveBalance/Human"
 			commandName="money">
 			<table class="data">
 				<tr>

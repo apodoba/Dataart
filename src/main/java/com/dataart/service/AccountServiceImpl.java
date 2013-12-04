@@ -46,8 +46,13 @@ public class AccountServiceImpl implements AccountService{
 	@Override
 	@Transactional
 	public void payForAccount(User loginUser, String accountForPay, double money){
-		increaseBalance(accountDAO.getAccountByName(accountForPay), money);
-		decreaseBalance(loginUser.getAccount(), money);
-		transactionService.saveTransactionWithType(TransactionsTypeEnum.HUMAN_PAYMENT.toString(), money, loginUser.getAccount());
+		Account account = accountDAO.getAccountByName(accountForPay);
+		if(account!=null){
+			increaseBalance(account, money);
+			decreaseBalance(loginUser.getAccount(), money);
+			transactionService.saveTransactionWithType(TransactionsTypeEnum.HUMAN_PAYMENT.toString(), money,loginUser.getAccount());
+		}else{
+			//TODO send error
+		}
 	}
 }

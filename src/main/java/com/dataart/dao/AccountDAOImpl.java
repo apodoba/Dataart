@@ -29,7 +29,7 @@ public class AccountDAOImpl implements AccountDAO {
 	@Override
     public Account getAccountByName(String accountName){
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Account.class);
-		criteria.add(Restrictions.eq("accountName", accountName));
+		criteria.add(Restrictions.eq("name", accountName));
 		return  (Account) criteria.uniqueResult();
     }
 
