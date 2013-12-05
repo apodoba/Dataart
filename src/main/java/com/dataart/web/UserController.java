@@ -73,7 +73,7 @@ public class UserController {
 				map.put("transactionsUsers", accountService.getTransactions(account));
     		}
     	}
-    	return "user";
+    	return "redirect:/list/users";
     }
     
     public boolean isAdmin(){

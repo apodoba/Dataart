@@ -3,6 +3,8 @@ package com.dataart.web;
 import java.util.Collections;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +26,9 @@ public class AccountController {
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private HttpServletRequest context;
+    
 	@Autowired
 	private TransactionService transactionService;
     
@@ -33,6 +38,7 @@ public class AccountController {
     		accountService.payForService(userService.getLoginUser(), money, number);
     	}else{
     		//TODO return error
+    		return "redirect:/payment/service?error=Wrong value of sum";
     	}
         return "redirect:/payment/service";
     }
@@ -42,7 +48,7 @@ public class AccountController {
     	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0){
     		accountService.payForAccount(userService.getLoginUser(), accountName, money);
     	}else{
-    		//TODO return error
+    		return "redirect:/payment/account?error=Wrong value of sum";
     	}
         return "redirect:/payment/account";
     }
@@ -52,7 +58,7 @@ public class AccountController {
     	if(money > 0){
     		accountService.increaseBalance(userService.getLoginUser().getAccount(), money);
     	}else{
-    		//TODO return error
+    		return "redirect:/payment/increase?error=Wrong value of sum";
     	}
         return "redirect:/payment/increase";
     }

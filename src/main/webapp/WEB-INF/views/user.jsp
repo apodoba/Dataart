@@ -163,10 +163,17 @@
     </c:if>
       </div>
       </c:if>
-      
+      <%-- <c:if test="${not empty error}"> --%>
+	<%-- </c:if> --%>
        <c:if test="${!empty services}">
       <div id="pay_for_services" class="section">
+      	<c:set var="error" value="<%= request.getParameter(\"error\") %>" />
+      	<c:if test="${!empty error}">
+        <font color="red"> <%= request.getParameter("error") %>
+		</font>
+       </c:if>
         <h3>Оплата услуг</h3>
+        
         <form:form method="post" action="/dataart/account/moveBalance/Service" commandName="money">
           <table>
             <tr>
@@ -212,6 +219,11 @@
       </c:if>
        <c:if test="${payAccount}">
       <div id="money_transfer" class="section">
+      <c:set var="error" value="<%= request.getParameter(\"error\") %>" />
+      	<c:if test="${!empty error}">
+        <font color="red"> <%= request.getParameter("error") %>
+		</font>
+       </c:if>
         <h3>Перевод денег</h3>
         <form:form method="post" action="/dataart/account/moveBalance/Human" commandName="money">
           <table>

@@ -45,7 +45,7 @@
      <img src="<%= request.getContextPath() %>/images/logo_big.png"><br><br>
     <c:if test="${not empty param.error}">
 		<font color="red"> <spring:message code="label.loginError" />
-			: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+			Неправильно введен логин или пароль
 		</font>
 	</c:if>
       <form action="<c:url value="/j_spring_security_check" />" method="POST">
