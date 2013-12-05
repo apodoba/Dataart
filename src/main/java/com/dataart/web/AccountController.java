@@ -1,5 +1,6 @@
 package com.dataart.web;
 
+import java.util.Collections;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class AccountController {
     }
     
     @RequestMapping(value = "/increase", method = RequestMethod.POST)
-    public String increaseAccount( @ModelAttribute("money") Double money) {
+    public String increaseAccount(@ModelAttribute("money") Double money) {
     	if(money > 0){
     		accountService.increaseBalance(userService.getLoginUser().getAccount(), money);
     	}else{
@@ -61,6 +62,8 @@ public class AccountController {
     	Account account = userService.getLoginUser().getAccount();
     	if(account != null){
     		map.put("transactions", accountService.getTransactions(account));
+    	}else{
+    		map.put("transactions", Collections.emptyList());
     	}
     	
         return "user";

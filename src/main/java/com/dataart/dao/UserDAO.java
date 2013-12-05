@@ -11,5 +11,7 @@ public interface UserDAO {
 	public User getUserByName(String userName);
 	
 	public List<User> listUsersForRole(String role);
+	
+	 public User getUserById(int userId);
 
 }

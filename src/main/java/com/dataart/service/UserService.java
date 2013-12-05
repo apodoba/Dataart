@@ -11,5 +11,9 @@ public interface UserService {
 	public User getLoginUser();
 	
 	public List<User> listSimpleUsers();
+	
+	public User getUserById(int userId);
+	
+	public User getUserByName(String userName);
 		
 }

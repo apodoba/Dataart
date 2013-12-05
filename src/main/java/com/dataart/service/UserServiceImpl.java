@@ -47,4 +47,16 @@ public class UserServiceImpl implements UserService {
 //		return Collections.emptyList();
 	}
 	
+	@Override
+	@Transactional
+	public User getUserById(int userId){
+		return userDAO.getUserById(userId);
+	}
+	
+	@Override
+	@Transactional
+	public User getUserByName(String userName){
+		return userDAO.getUserByName(userName);
+	}
+	
 }

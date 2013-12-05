@@ -38,4 +38,9 @@ public class UserDAOImpl implements UserDAO {
 		criteria.add(Restrictions.eq("userName", userName));
 		return  (User) criteria.uniqueResult();
     }
+	
+	@Override
+    public User getUserById(int userId){
+		return  (User) sessionFactory.getCurrentSession().load(User.class, userId);
+    }
 }

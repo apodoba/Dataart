@@ -101,26 +101,41 @@
           <img src="<%= request.getContextPath() %>/images/profile.png"><br>Профиль
         </a>
       </div>
+      <c:if test="${admin==null || !admin}">
       <div class="button">
         <a href="<c:url value="/payment/service"/>">
           <img src="<%= request.getContextPath() %>/images/communal.png"><br>Оплатить услуги
         </a>
       </div>
+      </c:if>
+      <c:if test="${admin==null || !admin}">
       <div class="button">
         <a href="<c:url value="/payment/account"/>">
           <img src="<%= request.getContextPath() %>/images/transfer_money.png"><br>Перевод средств
         </a>
       </div>
+      </c:if>
+      <c:if test="${admin==null || !admin}">
       <div class="button">
         <a href="<c:url value="/payment/increase"/>">
           <img src="<%= request.getContextPath() %>/images/fill_account.png"><br>Пополнить счет
         </a>
       </div>
+      </c:if>
+      <c:if test="${admin==null || !admin}">
       <div class="button">
         <a href="<c:url value="/account/transactions"/>">
           <img src="<%= request.getContextPath() %>/images/transactions.png"><br>Журнал транзакций
         </a>
       </div>
+      </c:if>
+      <c:if test="${admin}">
+      <div class="button">
+        <a href="<c:url value="/list/users"/>">
+          <img src="<%= request.getContextPath() %>/images/log.png"><br>Лог
+        </a>
+      </div>
+      </c:if>
       <div class="button" id="exit">
         <a href="<c:url value="/logout" />"><img src="<%= request.getContextPath() %>/images/exit.png">&nbsp;Выход</a>
       </div>
@@ -139,7 +154,7 @@
 			${userProfile.getEmail()}<br>
 		<spring:message code="label.telephone" />&nbsp;
 			${userProfile.getPhone()}<br>
-	<c:if test="${!empty userAccount}">
+	<c:if test="${!empty userAccount && !admin}">
 		<h4><spring:message code="label.accountNumber" />&nbsp;
 			${userAccount.getName()}</h4>
 		<h4><spring:message code="label.accountBalance" />&nbsp;
@@ -195,7 +210,7 @@
         </form:form>
       </div>
       </c:if>
-       <c:if test="${!empty payAccount}">
+       <c:if test="${payAccount}">
       <div id="money_transfer" class="section">
         <h3>Перевод денег</h3>
         <form:form method="post" action="/dataart/account/moveBalance/Human" commandName="money">
@@ -215,7 +230,7 @@
         </form:form>
       </div>
       </c:if>
-       <c:if test="${!empty transactions}">
+       <c:if test="${transactions != null}">
       <div id="transactions" class="section">
         <h3>Журнал транзакций</h3>
         <div style="height: 500px; overflow:auto;">
@@ -249,7 +264,7 @@
         </div>
       </div>
       </c:if>
-       <c:if test="${!empty increaseAccount}">
+       <c:if test="${increaseAccount}">
       <div id="fill_account" class="section">
         <h4>Пополнить счет</h4>
         <form:form method="post" action="/dataart/account/increase" commandName="money">
@@ -263,7 +278,76 @@
             </tr>
           </table>
         </form:form>
+        </div>
       </c:if>
+      
+       <c:if test="${!empty userList && admin}">
+       <div id="logs" class="section">
+        <h4>System logs</h4>
+      <form:form method="post" action="/dataart/users/transactions" commandName="user1">
+          <table>
+            <tr>
+              <td>Select User:</td>
+              <td>
+              
+            <c:set var="selectedUser" value="${selectedUser}" />
+						<c:set var="selectedFlag" value="${!empty selectedUser}" /> 
+						<select	name=locale>
+							<c:forEach var="user" items="${userList}"  >
+								<c:choose>
+									<c:when test="${selectedFlag}">
+										<c:choose>
+											<c:when
+												test="${user.getUserName().equals(selectedUser.getUserName())}">
+												<option selected>${user.getUserName()}</option>
+											</c:when>
+											<c:otherwise>
+												<option>${user.getUserName()}</option>
+											</c:otherwise>
+										</c:choose>
+									</c:when>
+									<c:otherwise>
+										<option>${user.getUserName()}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+					</select> 
+              <input type="submit" value="Отправить">
+              </td>
+            </tr>
+          </table>
+        </form:form>
+        <hr>
+         <table width="100%">
+            <thead>
+              <td>Дата</td>
+              <td>Сумма</td>
+              <td>Номер оплаты</td>
+              <td>Тип</td>
+            </thead>
+            <c:forEach items="${transactionsUsers}" var="transaction">
+   				<tr>
+              		<td><c:out value="${transaction.getDate()}"></c:out></td>
+              		<td><c:out value="${transaction.getAmount()}"></c:out></td>
+              		<td><c:out value="${transaction.getDescription()}"></c:out></td>
+              		<td>
+              			<c:set var="transactionType" value="${transaction.getTransactionType().getName()}" /> 
+						<c:if test="${transactionType.equals('SERVICE_PAYMENT')}">
+							Оплата услуги
+						</c:if>
+						<c:if test="${transactionType.equals('HUMAN_PAYMENT')}">
+							Перевод стредств
+						</c:if>
+						<c:if test="${transactionType.equals('INCREASE_ACCOUNT_PAYMENT')}">
+							Поплнение счета
+						</c:if>
+					</td>
+            	</tr>
+			</c:forEach>
+          </table>
+      </div>
+      </c:if>
+      
     </div>
   </body>
 </html>
