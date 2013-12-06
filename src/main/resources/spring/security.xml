@@ -12,12 +12,12 @@
 		<intercept-url pattern="/Add/*" access="ROLE_ADMIN" />
 		<intercept-url pattern="/List/*" access="ROLE_ADMIN" />
 		<intercept-url pattern="/Profile" access="ROLE_USER,ROLE_ADMIN" />
-		<intercept-url pattern="/moveBalance/*" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/moveBalance/*" access="ROLE_USER" />
 		<intercept-url pattern="/account" access="ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/service" access="ROLE_USER,ROLE_ADMIN" />
 		<intercept-url pattern="/list/users/" access="ROLE_ADMIN" />
-		<intercept-url pattern="/payment/*" access="ROLE_USER,ROLE_ADMIN" />
-		<intercept-url pattern="/account/*" access="ROLE_USER,ROLE_ADMIN" />
+		<intercept-url pattern="/payment/*" access="ROLE_USER" />
+		<intercept-url pattern="/account/*" access="ROLE_USER" />
 		<intercept-url pattern="/images/*" access="ROLE_USER,ROLE_ADMIN,ROLE_ANONYMOUS" />
 		<form-login login-page="/login.jsp" default-target-url="/index"
 			authentication-failure-url="/login.jsp?error=true" />
