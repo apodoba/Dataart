@@ -32,9 +32,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User getLoginUser() {
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		if (currentUser == null) {
-			currentUser = userDAO.getUserByName(userName);
-		}
+		currentUser = userDAO.getUserByName(userName);
 		return currentUser;
 	}
 

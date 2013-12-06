@@ -34,11 +34,11 @@ public class AccountController {
     
     @RequestMapping(value = "/moveBalance/Service", method = RequestMethod.POST)
     public String moveBalanceToService(@ModelAttribute("money") Double money, @ModelAttribute("number") String number) {
-    	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0){
-    		accountService.payForService(userService.getLoginUser(), money, number);
+    	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0 && Integer.parseInt(number)>0){
+    		String description = context.getParameter("service") +" "+ number;
+    		accountService.payForService(userService.getLoginUser(), money, description);
     	}else{
-    		//TODO return error
-    		return "redirect:/payment/service?error=Wrong value of sum";
+    		return "redirect:/payment/service?error=Wrong value of sum or account number";
     	}
         return "redirect:/payment/service";
     }
@@ -46,7 +46,10 @@ public class AccountController {
     @RequestMapping(value = "/moveBalance/Human", method = RequestMethod.POST)
     public String moveBlToHuman(@ModelAttribute("account") String accountName, @ModelAttribute("money") Double money) {
     	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0){
-    		accountService.payForAccount(userService.getLoginUser(), accountName, money);
+    		Account account = accountService.getAccount(accountName);
+    		if(account == null || (account!=null && account.getId()!=userService.getLoginUser().getAccount().getId())) 
+    			return "redirect:/payment/account?error=Account doesn't exist";
+    		accountService.payForAccount(userService.getLoginUser(), money, account);
     	}else{
     		return "redirect:/payment/account?error=Wrong value of sum";
     	}

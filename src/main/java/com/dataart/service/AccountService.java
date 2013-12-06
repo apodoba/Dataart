@@ -16,7 +16,7 @@ public interface AccountService {
 	
 	public void payForService(User loginUser, double money, String numberForPay);
 	
-	public void payForAccount(User loginUser, String accountForPay, double money);
+	public void payForAccount(User loginUser, double money, Account accountForPay);
 	
 	public void putMoneyForAccount(User loginUser, double money);
 	

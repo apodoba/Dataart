@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dataart.domain.Account;
 import com.dataart.domain.User;
 import com.dataart.service.AccountService;
 import com.dataart.service.UserService;
+
 
 @Controller
 public class UserController {
@@ -57,10 +57,28 @@ public class UserController {
         return "user";
     }
     
-    @RequestMapping(value="/users/transactions", method = RequestMethod.POST)
+    @RequestMapping(value="/users/transactions")
     public String getTransactionForUser(Map<String, Object> map) {
     	String name = context.getParameter("locale");
-    	User user = userService.getUserByName((name));
+    	if(name == null){
+    		getAllUsers(map);
+    	}else{
+    		getAllTransactionsForUsers(map, name);
+    	}
+    	return "user";
+    }
+    
+    private void getAllUsers(Map<String, Object> map){
+    	List<User> allUsers = userService.listUsers();
+        map.put("userList", allUsers);
+        map.put("admin", isAdmin());
+        if(!allUsers.isEmpty()){
+        	map.put("selectedUser", allUsers.get(0));
+        }
+    }
+    
+    private void getAllTransactionsForUsers(Map<String, Object> map, String userName){
+    	User user = userService.getUserByName((userName));
     	List<User> allUsers = userService.listUsers();
         map.put("userList", allUsers);
         map.put("admin", isAdmin());
@@ -73,7 +91,6 @@ public class UserController {
 				map.put("transactionsUsers", accountService.getTransactions(account));
     		}
     	}
-    	return "redirect:/list/users";
     }
     
     public boolean isAdmin(){

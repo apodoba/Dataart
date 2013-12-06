@@ -131,7 +131,7 @@
       </c:if>
       <c:if test="${admin}">
       <div class="button">
-        <a href="<c:url value="/list/users"/>">
+        <a href="<c:url value="/users/transactions"/>">
           <img src="<%= request.getContextPath() %>/images/log.png"><br>Лог
         </a>
       </div>
@@ -174,13 +174,13 @@
        </c:if>
         <h3>Оплата услуг</h3>
         
-        <form:form method="post" action="/dataart/account/moveBalance/Service" commandName="money">
+        <form:form method="post" action="${pageContext.request.contextPath}/account/moveBalance/Service" commandName="money">
           <table>
             <tr>
               <td>Тип услуги:</td>
               <td><c:set var="selectedService" value="${selectedService}" />
 						<c:set var="selectedFlag" value="${!empty selectedService}" /> 
-						<select	name=locale>
+						<select	name=service>
 							<c:forEach var="lservice" items="${services}">
 								<c:choose>
 									<c:when test="${selectedFlag}">
@@ -225,7 +225,7 @@
 		</font>
        </c:if>
         <h3>Перевод денег</h3>
-        <form:form method="post" action="/dataart/account/moveBalance/Human" commandName="money">
+        <form:form method="post" action="${pageContext.request.contextPath}/account/moveBalance/Human" commandName="money">
           <table>
             <tr>
               <td>Номер счета:</td>
@@ -279,7 +279,7 @@
        <c:if test="${increaseAccount}">
       <div id="fill_account" class="section">
         <h4>Пополнить счет</h4>
-        <form:form method="post" action="/dataart/account/increase" commandName="money">
+        <form:form method="post" action="${pageContext.request.contextPath}/account/increase" commandName="money">
           <table>
             <tr>
               <td>Код пополнения:</td>
@@ -296,7 +296,7 @@
        <c:if test="${!empty userList && admin}">
        <div id="logs" class="section">
         <h4>System logs</h4>
-      <form:form method="post" action="/dataart/users/transactions" commandName="user1">
+      <form:form method="post" action="${pageContext.request.contextPath}/users/transactions" commandName="user1">
           <table>
             <tr>
               <td>Select User:</td>
