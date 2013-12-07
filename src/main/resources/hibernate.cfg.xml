@@ -9,5 +9,6 @@
         <mapping class="com.dataart.domain.Service"/>
         <mapping class="com.dataart.domain.TransactionType"/>
         <mapping class="com.dataart.domain.Transaction"/>
+        <mapping class="com.dataart.domain.ScratchCard"/>
     </session-factory>
 </hibernate-configuration>

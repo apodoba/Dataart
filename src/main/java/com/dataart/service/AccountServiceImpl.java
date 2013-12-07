@@ -59,7 +59,8 @@ public class AccountServiceImpl implements AccountService{
 		if(accountForPay!=null && accountForPay.getId()!=loginUser.getAccount().getId()){
 			increaseBalance(accountForPay, money);
 			decreaseBalance(loginUser.getAccount(), money);
-			transactionService.saveTransactionWithType(TransactionsTypeEnum.HUMAN_PAYMENT.toString(), money,loginUser.getAccount(), null);
+			transactionService.saveTransactionWithType(TransactionsTypeEnum.HUMAN_PAYMENT.toString(), money,loginUser.getAccount(), accountForPay.getName());
+			transactionService.saveTransactionWithType(TransactionsTypeEnum.INCREASE_ACCOUNT_FROM.toString(), money, accountForPay, loginUser.getAccount().getName());
 		}
 	}
 	

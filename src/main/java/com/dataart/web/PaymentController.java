@@ -31,11 +31,6 @@ public class PaymentController {
           
     @RequestMapping("/account")
     public String pagePayForAccount(Map<String, Object> map) {
-//    	List<User> allUsers = userService.listUsers();
-//		map.put("users", allUsers);
-//		if (allUsers != null && !allUsers.isEmpty()) {
-//			map.put("selectedUser", allUsers.get(0));
-//		}
     	map.put("payAccount", true);
         return "user";
     }

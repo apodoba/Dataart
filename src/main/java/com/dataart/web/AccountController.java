@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dataart.domain.Account;
+import com.dataart.domain.ScratchCard;
 import com.dataart.service.AccountService;
+import com.dataart.service.ScratchCardService;
 import com.dataart.service.TransactionService;
 import com.dataart.service.UserService;
 
@@ -31,7 +33,10 @@ public class AccountController {
     
 	@Autowired
 	private TransactionService transactionService;
-    
+
+	@Autowired
+	private ScratchCardService cardService;
+	
     @RequestMapping(value = "/moveBalance/Service", method = RequestMethod.POST)
     public String moveBalanceToService(@ModelAttribute("money") Double money, @ModelAttribute("number") String number) {
     	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0 && Integer.parseInt(number)>0){
@@ -47,7 +52,7 @@ public class AccountController {
     public String moveBlToHuman(@ModelAttribute("account") String accountName, @ModelAttribute("money") Double money) {
     	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0){
     		Account account = accountService.getAccount(accountName);
-    		if(account == null || (account!=null && account.getId()!=userService.getLoginUser().getAccount().getId())) 
+    		if(account == null || (account!=null && account.getId()==userService.getLoginUser().getAccount().getId())) 
     			return "redirect:/payment/account?error=Account doesn't exist";
     		accountService.payForAccount(userService.getLoginUser(), money, account);
     	}else{
@@ -57,15 +62,23 @@ public class AccountController {
     }
     
     @RequestMapping(value = "/increase", method = RequestMethod.POST)
-    public String increaseAccount(@ModelAttribute("money") Double money) {
-    	if(money > 0){
-    		accountService.increaseBalance(userService.getLoginUser().getAccount(), money);
+    public String increaseAccount(@ModelAttribute("money") String money) {
+         	if(money!=null){
+        		ScratchCard card= cardService.getCardById(money);
+        		if ((card != null  && (card.getEnable()) )) 
+        			{
+        	   		accountService.putMoneyForAccount(userService.getLoginUser(), card.getMoney());
+        	   		cardService.disable(card);
+        	   		return "redirect:/payment/increase?error=Your account increased at "+card.getMoney();
+        			}else return "redirect:/payment/increase?error=Scratch card with this number doesn't exist";
+        		
+
     	}else{
     		return "redirect:/payment/increase?error=Wrong value of sum";
     	}
-        return "redirect:/payment/increase";
+       
     }
-    
+
     @RequestMapping(value = "/transactions")
     public String getTransactions(Map<String, Object> map) {
     	Account account = userService.getLoginUser().getAccount();

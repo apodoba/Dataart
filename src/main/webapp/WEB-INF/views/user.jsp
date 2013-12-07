@@ -7,6 +7,7 @@
 <%-- <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+
 <title><spring:message code="label.appTitle" /></title>
 </head>
 <body>
@@ -91,20 +92,7 @@
       zoom:1;
       }
     </style>
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-	$("form").submit(function (e){
-	    e.preventDefault();
-	    $(this).find('input, textarea').each(function() {
-		if ( $(this).val() == null || $(this).val() == "" ) {
-		    $(this).css("outline", "1px dashed red")
-		}
-		else { $(this).css("outline", "none"); };
 
-	    });
-	});
-    </script>
     <title>TeamBanking</title>
   </head>
   <body>
@@ -242,7 +230,7 @@
         <form:form method="post" action="${pageContext.request.contextPath}/account/moveBalance/Human" commandName="money">
           <table>
             <tr>
-              <td>Номер счета:</td>
+              <td>Номер счёта:</td>
               <td><input type="text" size="15" name="account"></td>
             </tr>
             <tr>
@@ -264,7 +252,7 @@
             <thead>
               <td>Дата</td>
               <td>Сумма</td>
-              <td>Номер оплаты</td>
+              <td>Номер счёта</td>
               <td>Тип</td>
             </thead>
             <c:forEach items="${transactions}" var="transaction">
@@ -278,10 +266,13 @@
 							Оплата услуги
 						</c:if>
 						<c:if test="${transactionType.equals('HUMAN_PAYMENT')}">
-							Перевод стредств
+							Перевод стредств на другой счёт
 						</c:if>
 						<c:if test="${transactionType.equals('INCREASE_ACCOUNT_PAYMENT')}">
-							Поплнение счета
+							Пополнение счета
+						</c:if>
+						<c:if test="${transactionType.equals('INCREASE_ACCOUNT_FROM')}">
+							Перевод стредств с другого счёта
 						</c:if>
 					</td>
             	</tr>
@@ -292,6 +283,11 @@
       </c:if>
        <c:if test="${increaseAccount}">
       <div id="fill_account" class="section">
+      	<c:set var="error" value="<%= request.getParameter(\"error\") %>" />
+      	<c:if test="${!empty error}">
+        <font color="red"> <%= request.getParameter("error") %>
+		</font>
+       </c:if>
         <h4>Пополнить счет</h4>
         <form:form method="post" action="${pageContext.request.contextPath}/account/increase" commandName="money">
           <table>
