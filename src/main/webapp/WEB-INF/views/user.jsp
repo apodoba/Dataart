@@ -91,6 +91,20 @@
       zoom:1;
       }
     </style>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+	$("form").submit(function (e){
+	    e.preventDefault();
+	    $(this).find('input, textarea').each(function() {
+		if ( $(this).val() == null || $(this).val() == "" ) {
+		    $(this).css("outline", "1px dashed red")
+		}
+		else { $(this).css("outline", "none"); };
+
+	    });
+	});
+    </script>
     <title>TeamBanking</title>
   </head>
   <body>
@@ -139,7 +153,7 @@
       <div class="button" id="exit">
         <a href="<c:url value="/logout" />"><img src="<%= request.getContextPath() %>/images/exit.png">&nbsp;Выход</a>
       </div>
-    </div class="button">
+    </div>
     <div id="container">
        <c:if test="${!empty userProfile}">
       <div id="profile" class="section">
