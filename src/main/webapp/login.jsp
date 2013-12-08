@@ -38,6 +38,21 @@
       zoom:1;
       }
     </style>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script type="text/javascript">
+      $(document).ready(function() {
+    $("form").submit(function (e){
+        $(this).find('input, textarea').each(function() {
+      if ( $(this).val() == null || $(this).val() == "" ) {
+          e.preventDefault();
+          $(this).css("outline", "1px dashed red")
+      }
+      else { $(this).css("outline", "none"); };
+  
+        });
+    });
+      });
+      </script>
     <title><spring:message code="label.appTitle" /></title>
   </head>
   <body>

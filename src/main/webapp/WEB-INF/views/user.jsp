@@ -91,6 +91,33 @@
       zoom:1;
       }
     </style>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("form").submit(function (e){
+            $(this).find('input, textarea').each(function() {
+                if ( $(this).val() == null || $(this).val() == "" ) {
+                    e.preventDefault();
+                    $(this).css("outline", "1px dashed red")
+                }
+                else { $(this).css("outline", "none"); };
+            });
+        });
+        var hash = window.location.hash.substr(1);
+        if (hash != 0 ) {
+            var obj = document.getElementById(hash);
+            $('#'+hash).fadeIn();
+        }
+        $( 'a[href^=#]' ).click( function () {
+            var we_want_to_see = $( this ).attr( 'href' ).substr(1);
+            var now_we_see = $(".section:visible");
+            if (now_we_see.attr('id') != we_want_to_see) {
+                now_we_see.fadeOut();
+            }
+            $('#'+we_want_to_see).fadeIn();
+        });
+    });
+    </script>
     <title><spring:message code="label.appTitle" /></title>
   </head>
   <body>
@@ -98,7 +125,7 @@
       <img id="logo" src="<%= request.getContextPath() %>/images/logo_small.png">
       <div class="button">
         <a href="<c:url value="/index"/>">
-          <img src="<%= request.getContextPath() %>/images/profile.png"><br><spring:message code="label.MenuProfile"/>
+          <img src="<%= request.getContextPath() %>/images/profile.png"><br><spring:message code="label.profile"/>
         </a>
       </div>
       <c:if test="${admin==null || !admin}">
@@ -131,7 +158,7 @@
       </c:if>
       <c:if test="${admin}">
       <div class="button">
-        <a href="<c:url value="/list/users"/>">
+        <a href="<c:url value="/users/transactions"/>">
           <img src="<%= request.getContextPath() %>/images/log.png"><br><spring:message code="label.Log"/>
         </a>
       </div>
@@ -174,13 +201,13 @@
        </c:if>
         <h3><spring:message code="label.PaymentforService"/></h3>
         
-        <form:form method="post" action="/dataart/account/moveBalance/Service" commandName="money">
+        <form:form method="post" action="${pageContext.request.contextPath}/account/moveBalance/Service" commandName="money">
           <table>
             <tr>
               <td><spring:message code="label.ServiceType"/></td>
               <td><c:set var="selectedService" value="${selectedService}" />
 						<c:set var="selectedFlag" value="${!empty selectedService}" /> 
-						<select	name=locale>
+						<select	name=service>
 							<c:forEach var="lservice" items="${services}">
 								<c:choose>
 									<c:when test="${selectedFlag}">
@@ -225,7 +252,7 @@
 		</font>
        </c:if>
         <h3><spring:message code="label.PaymentHuman"/></h3>
-        <form:form method="post" action="/dataart/account/moveBalance/Human" commandName="money">
+        <form:form method="post" action="${pageContext.request.contextPath}/account/moveBalance/Human" commandName="money">
           <table>
             <tr>
               <td><spring:message code="label.accountNumber"/></td>
@@ -279,7 +306,12 @@
        <c:if test="${increaseAccount}">
       <div id="fill_account" class="section">
         <h4><spring:message code="label.AccountAddFunds"/></h4>
-        <form:form method="post" action="/dataart/account/increase" commandName="money">
+        <c:set var="error" value="<%= request.getParameter(\"error\") %>" />
+ -        <c:if test="${!empty error}">
+ -        <font color="red"> <%= request.getParameter("error") %>
+ -    </font>
+ -       </c:if>
+ -        <form:form method="post" action="${pageContext.request.contextPath}/account/increase" commandName="money">
           <table>
             <tr>
               <td><spring:message code="label.CodeaddFunds"/></td>
@@ -296,7 +328,7 @@
        <c:if test="${!empty userList && admin}">
        <div id="logs" class="section">
         <h4><spring:message code="label.TransactionLog"/></h4>
-      <form:form method="post" action="/dataart/users/transactions" commandName="user1">
+       <form:form method="post" action="${pageContext.request.contextPath}/users/transactions" commandName="user1">
           <table>
             <tr>
               <td><spring:message code="label.SelectUser"/></td>
