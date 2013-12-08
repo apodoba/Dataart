@@ -7,7 +7,6 @@
 <%-- <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-
 <title><spring:message code="label.appTitle" /></title>
 </head>
 <body>
@@ -92,56 +91,55 @@
       zoom:1;
       }
     </style>
-
-    <title>TeamBanking</title>
+    <title><spring:message code="label.appTitle" /></title>
   </head>
   <body>
     <div id="menu">
       <img id="logo" src="<%= request.getContextPath() %>/images/logo_small.png">
       <div class="button">
         <a href="<c:url value="/index"/>">
-          <img src="<%= request.getContextPath() %>/images/profile.png"><br>Профиль
+          <img src="<%= request.getContextPath() %>/images/profile.png"><br><spring:message code="label.MenuProfile"/>
         </a>
       </div>
       <c:if test="${admin==null || !admin}">
       <div class="button">
         <a href="<c:url value="/payment/service"/>">
-          <img src="<%= request.getContextPath() %>/images/communal.png"><br>Оплатить услуги
+          <img src="<%= request.getContextPath() %>/images/communal.png"><br><spring:message code="label.PaymentService"/>
         </a>
       </div>
       </c:if>
       <c:if test="${admin==null || !admin}">
       <div class="button">
         <a href="<c:url value="/payment/account"/>">
-          <img src="<%= request.getContextPath() %>/images/transfer_money.png"><br>Перевод средств
+          <img src="<%= request.getContextPath() %>/images/transfer_money.png"><br><spring:message code="label.PaymentHuman"/>
         </a>
       </div>
       </c:if>
       <c:if test="${admin==null || !admin}">
       <div class="button">
         <a href="<c:url value="/payment/increase"/>">
-          <img src="<%= request.getContextPath() %>/images/fill_account.png"><br>Пополнить счет
+          <img src="<%= request.getContextPath() %>/images/fill_account.png"><br><spring:message code="label.AccountAddFunds"/>
         </a>
       </div>
       </c:if>
       <c:if test="${admin==null || !admin}">
       <div class="button">
         <a href="<c:url value="/account/transactions"/>">
-          <img src="<%= request.getContextPath() %>/images/transactions.png"><br>Журнал транзакций
+          <img src="<%= request.getContextPath() %>/images/transactions.png"><br><spring:message code="label.TransactionLog"/>
         </a>
       </div>
       </c:if>
       <c:if test="${admin}">
       <div class="button">
-        <a href="<c:url value="/users/transactions"/>">
-          <img src="<%= request.getContextPath() %>/images/log.png"><br>Лог
+        <a href="<c:url value="/list/users"/>">
+          <img src="<%= request.getContextPath() %>/images/log.png"><br><spring:message code="label.Log"/>
         </a>
       </div>
       </c:if>
       <div class="button" id="exit">
-        <a href="<c:url value="/logout" />"><img src="<%= request.getContextPath() %>/images/exit.png">&nbsp;Выход</a>
+        <a href="<c:url value="/logout" />"><img src="<%= request.getContextPath() %>/images/exit.png">&nbsp;<spring:message code="label.logout"/></a>
       </div>
-    </div>
+    </div class="button">
     <div id="container">
        <c:if test="${!empty userProfile}">
       <div id="profile" class="section">
@@ -174,15 +172,15 @@
         <font color="red"> <%= request.getParameter("error") %>
 		</font>
        </c:if>
-        <h3>Оплата услуг</h3>
+        <h3><spring:message code="label.PaymentforService"/></h3>
         
-        <form:form method="post" action="${pageContext.request.contextPath}/account/moveBalance/Service" commandName="money">
+        <form:form method="post" action="/dataart/account/moveBalance/Service" commandName="money">
           <table>
             <tr>
-              <td>Тип услуги:</td>
+              <td><spring:message code="label.ServiceType"/></td>
               <td><c:set var="selectedService" value="${selectedService}" />
 						<c:set var="selectedFlag" value="${!empty selectedService}" /> 
-						<select	name=service>
+						<select	name=locale>
 							<c:forEach var="lservice" items="${services}">
 								<c:choose>
 									<c:when test="${selectedFlag}">
@@ -205,11 +203,11 @@
               </td>
             </tr>
             <tr>
-              <td>Номер счета:</td>
+              <td><spring:message code="label.accountNumber"/></td>
               <td><input type="text" size="15" name="number"></td>
             </tr>
             <tr>
-              <td>Сумма:</td>
+              <td><spring:message code="label.money"/></td>
               <td><input type="text" size="10" name="money"></td>
             </tr>
             <tr>
@@ -226,15 +224,15 @@
         <font color="red"> <%= request.getParameter("error") %>
 		</font>
        </c:if>
-        <h3>Перевод денег</h3>
-        <form:form method="post" action="${pageContext.request.contextPath}/account/moveBalance/Human" commandName="money">
+        <h3><spring:message code="label.PaymentHuman"/></h3>
+        <form:form method="post" action="/dataart/account/moveBalance/Human" commandName="money">
           <table>
             <tr>
-              <td>Номер счёта:</td>
+              <td><spring:message code="label.accountNumber"/></td>
               <td><input type="text" size="15" name="account"></td>
             </tr>
             <tr>
-              <td>Сумма:</td>
+              <td><spring:message code="label.money"/></td>
               <td><input type="text" size="10" name="money"></td>
             </tr>
             <tr>
@@ -246,14 +244,14 @@
       </c:if>
        <c:if test="${transactions != null}">
       <div id="transactions" class="section">
-        <h3>Журнал транзакций</h3>
+        <h3><spring:message code="label.TransactionLog"/></h3>
         <div style="height: 500px; overflow:auto;">
           <table width="100%">
             <thead>
-              <td>Дата</td>
-              <td>Сумма</td>
-              <td>Номер счёта</td>
-              <td>Тип</td>
+              <td><spring:message code="label.TransactionDate"/></td>
+              <td><spring:message code="label.TransactionSum"/></td>
+              <td><spring:message code="label.NumberPayment"/></td>
+              <td><spring:message code="label.TransactionType"/></td>
             </thead>
             <c:forEach items="${transactions}" var="transaction">
    				<tr>
@@ -263,16 +261,13 @@
               		<td>
               			<c:set var="transactionType" value="${transaction.getTransactionType().getName()}" /> 
 						<c:if test="${transactionType.equals('SERVICE_PAYMENT')}">
-							Оплата услуги
+							<spring:message code="label.PaymentforService"/>
 						</c:if>
 						<c:if test="${transactionType.equals('HUMAN_PAYMENT')}">
-							Перевод стредств на другой счёт
+							<spring:message code="label.PaymentHuman"/>
 						</c:if>
 						<c:if test="${transactionType.equals('INCREASE_ACCOUNT_PAYMENT')}">
-							Пополнение счета
-						</c:if>
-						<c:if test="${transactionType.equals('INCREASE_ACCOUNT_FROM')}">
-							Перевод стредств с другого счёта
+							<spring:message code="label.AccountAddFunds"/>
 						</c:if>
 					</td>
             	</tr>
@@ -283,16 +278,11 @@
       </c:if>
        <c:if test="${increaseAccount}">
       <div id="fill_account" class="section">
-      	<c:set var="error" value="<%= request.getParameter(\"error\") %>" />
-      	<c:if test="${!empty error}">
-        <font color="red"> <%= request.getParameter("error") %>
-		</font>
-       </c:if>
-        <h4>Пополнить счет</h4>
-        <form:form method="post" action="${pageContext.request.contextPath}/account/increase" commandName="money">
+        <h4><spring:message code="label.AccountAddFunds"/></h4>
+        <form:form method="post" action="/dataart/account/increase" commandName="money">
           <table>
             <tr>
-              <td>Код пополнения:</td>
+              <td><spring:message code="label.CodeaddFunds"/></td>
               <td><input type="text" size="15" name="money"></td>
             </tr>
             <tr>
@@ -305,11 +295,11 @@
       
        <c:if test="${!empty userList && admin}">
        <div id="logs" class="section">
-        <h4>System logs</h4>
-      <form:form method="post" action="${pageContext.request.contextPath}/users/transactions" commandName="user1">
+        <h4><spring:message code="label.TransactionLog"/></h4>
+      <form:form method="post" action="/dataart/users/transactions" commandName="user1">
           <table>
             <tr>
-              <td>Select User:</td>
+              <td><spring:message code="label.SelectUser"/></td>
               <td>
               
             <c:set var="selectedUser" value="${selectedUser}" />
@@ -342,10 +332,10 @@
         <hr>
          <table width="100%">
             <thead>
-              <td>Дата</td>
-              <td>Сумма</td>
-              <td>Номер оплаты</td>
-              <td>Тип</td>
+              <td><spring:message code="label.TransactionDate"/></td>
+              <td><spring:message code="label.TransactionSum"/></td>
+              <td><spring:message code="label.NumberPayment"/></td>
+              <td><spring:message code="label.TransactionType"/></td>
             </thead>
             <c:forEach items="${transactionsUsers}" var="transaction">
    				<tr>
@@ -355,13 +345,13 @@
               		<td>
               			<c:set var="transactionType" value="${transaction.getTransactionType().getName()}" /> 
 						<c:if test="${transactionType.equals('SERVICE_PAYMENT')}">
-							Оплата услуги
+							<spring:message code="label.PaymentforService"/>
 						</c:if>
 						<c:if test="${transactionType.equals('HUMAN_PAYMENT')}">
-							Перевод стредств
+							<spring:message code="label.PaymentHuman"/>
 						</c:if>
 						<c:if test="${transactionType.equals('INCREASE_ACCOUNT_PAYMENT')}">
-							Поплнение счета
+							<spring:message code="label.AccountAddFunds"/>
 						</c:if>
 					</td>
             	</tr>
