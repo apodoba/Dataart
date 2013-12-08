@@ -46,13 +46,12 @@
     <script type="text/javascript">
     $(document).ready(function() {
 	$("form").submit(function (e){
-	    e.preventDefault();
 	    $(this).find('input, textarea').each(function() {
 		if ( $(this).val() == null || $(this).val() == "" ) {
+		    e.preventDefault();
 		    $(this).css("outline", "1px dashed red")
 		}
 		else { $(this).css("outline", "none"); };
-
 	    });
 	});
 	var hash = window.location.hash.substr(1);
