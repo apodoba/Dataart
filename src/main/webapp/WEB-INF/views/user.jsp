@@ -199,6 +199,11 @@
         <font color="red"> <%= request.getParameter("error") %>
 		</font>
        </c:if>
+       <c:set var="answer" value="<%= request.getParameter(\"answer\") %>" />
+      	<c:if test="${!empty answer}">
+        <font color="green"> <%= request.getParameter("answer") %>
+		</font>
+       </c:if>
         <h3><spring:message code="label.PaymentforService"/></h3>
         
         <form:form method="post" action="${pageContext.request.contextPath}/account/moveBalance/Service" commandName="money">
@@ -249,6 +254,11 @@
       <c:set var="error" value="<%= request.getParameter(\"error\") %>" />
       	<c:if test="${!empty error}">
         <font color="red"> <%= request.getParameter("error") %>
+		</font>
+       </c:if>
+       <c:set var="answer" value="<%= request.getParameter(\"answer\") %>" />
+      	<c:if test="${!empty answer}">
+        <font color="green"> <%= request.getParameter("answer") %>
 		</font>
        </c:if>
         <h3><spring:message code="label.PaymentHuman"/></h3>
@@ -313,7 +323,12 @@
         <c:set var="error" value="<%= request.getParameter(\"error\") %>" />
          <c:if test="${!empty error}">
          <font color="red"> <%= request.getParameter("error") %>
-     </font>
+     	</font>
+       </c:if>
+        <c:set var="answer" value="<%= request.getParameter(\"answer\") %>" />
+      	<c:if test="${!empty answer}">
+        <font color="green"> <%= request.getParameter("answer") %>
+		</font>
        </c:if>
         <form:form method="post" action="${pageContext.request.contextPath}/account/increase" commandName="money">
           <table>

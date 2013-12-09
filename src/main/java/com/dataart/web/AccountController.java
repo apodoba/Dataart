@@ -45,20 +45,22 @@ public class AccountController {
     	}else{
     		return "redirect:/payment/service?error=Wrong value of sum or account number";
     	}
-        return "redirect:/payment/service";
+        return "redirect:/payment/service?answer=You paid for "+context.getParameter("service");
     }
     
     @RequestMapping(value = "/moveBalance/Human", method = RequestMethod.POST)
     public String moveBlToHuman(@ModelAttribute("account") String accountName, @ModelAttribute("money") Double money) {
     	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0){
     		Account account = accountService.getAccount(accountName);
-    		if(account == null || (account!=null && account.getId()==userService.getLoginUser().getAccount().getId())) 
+    		if(account == null) 
     			return "redirect:/payment/account?error=Account doesn't exist";
+    		if(account.getId().intValue()==userService.getLoginUser().getAccount().getId())
+    			return "redirect:/payment/account?error=It's your own account";
     		accountService.payForAccount(userService.getLoginUser(), money, account);
     	}else{
     		return "redirect:/payment/account?error=Wrong value of sum";
     	}
-        return "redirect:/payment/account";
+        return "redirect:/payment/account?answer=You paid for "+accountName + " account";
     }
     
     @RequestMapping(value = "/increase", method = RequestMethod.POST)
@@ -69,7 +71,7 @@ public class AccountController {
         			{
         	   		accountService.putMoneyForAccount(userService.getLoginUser(), card.getMoney());
         	   		cardService.disable(card);
-        	   		return "redirect:/payment/increase?error=Your account increased at "+card.getMoney();
+        	   		return "redirect:/payment/increase?answer=Your account increased at "+card.getMoney();
         			}else return "redirect:/payment/increase?error=Scratch card with this number doesn't exist";
         		
 
