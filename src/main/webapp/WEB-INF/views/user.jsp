@@ -311,11 +311,11 @@
       <div id="fill_account" class="section">
         <h4><spring:message code="label.AccountAddFunds"/></h4>
         <c:set var="error" value="<%= request.getParameter(\"error\") %>" />
- -        <c:if test="${!empty error}">
- -        <font color="red"> <%= request.getParameter("error") %>
- -    </font>
- -       </c:if>
- -        <form:form method="post" action="${pageContext.request.contextPath}/account/increase" commandName="money">
+         <c:if test="${!empty error}">
+         <font color="red"> <%= request.getParameter("error") %>
+     </font>
+       </c:if>
+        <form:form method="post" action="${pageContext.request.contextPath}/account/increase" commandName="money">
           <table>
             <tr>
               <td><spring:message code="label.CodeaddFunds"/></td>
