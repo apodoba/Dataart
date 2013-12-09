@@ -45,6 +45,35 @@
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
+	$(".code").keyup(function(e) { //run this on account numbers and fill code
+	    /*keycodes for numbers,ctrl,shift,alt,tab,shift-tab,PgUp,PgDn,Ins,Home,End,enter,backspace*/
+	    var pattern = /^(4[8-9]|5[0-8]|8|9|13|16|17|18|91|3[3-9]|45|40)$/;
+	    var is_number = pattern.test(String(e.which));
+	    // remove chars if they're unappropriate or number is too long
+	    if (!is_number || $(this).val().length >= 16) {
+		var value = $(this).val()
+		$(this).val(value.substr(0,value.length -1) );
+	    }
+	});
+	$(".summ").keyup(function(e) { // this is only for money sum
+	    /*keycodes for numbers,ctrl,shift,alt,tab,shift-tab,PgUp,PgDn,Ins,Home,End,enter,backspace,dot*/
+	    var pattern = /^(4[8-9]|5[0-8]|8|9|13|16|17|18|91|3[3-9]|45|40|190)$/;
+	    var is_number_and_dot = pattern.test(String(e.which));
+	    // if we see dot in string, measure how far it is from end
+	    if ($(this).val().indexOf('.') >= 0 ){
+		var is_dot_present = $(this).val().indexOf('.');
+		var distance_from_dot = $(this).val().length - $(this).val().indexOf('.');
+	    } else {
+		var is_dot_present = false;
+		var distance_from_dot = false;
+	    }
+	    // remove chars if they're unappropriate or number tolreance is too big
+	    // or number is too long
+	    if (!is_number_and_dot || distance_from_dot > 3 || $(this).val().length >= 8) {
+		var value = $(this).val()
+		$(this).val(value.substr(0,value.length -1) );
+	    }
+	});
 	$("form").submit(function (e){
 	    $(this).find('input, textarea').each(function() {
 		if ( $(this).val() == null || $(this).val() == "" ) {
@@ -135,11 +164,11 @@
 	    </tr>
 	    <tr>
 	      <td>Номер счета:</td>
-	      <td><input type="text" size="15"></td>
+	      <td><input class="code" type="text" size="15"></td>
 	    </tr>
 	    <tr>
 	      <td>Сумма:</td>
-	      <td><input type="text" size="10"></td>
+	      <td><input class="summ" type="text" size="10"></td>
 	    </tr>
 	    <tr>
 	      <td colspan="2" align="center"><input type="submit" value="Отправить"></td>
@@ -153,11 +182,11 @@
 	  <table>
 	    <tr>
 	      <td>Номер счета:</td>
-	      <td><input type="text" size="15"></td>
+	      <td><input class="code" type="text" size="15"></td>
 	    </tr>
 	    <tr>
 	      <td>Сумма:</td>
-	      <td><input type="text" size="10"></td>
+	      <td><input class="summ" type="text" size="10"></td>
 	    </tr>
 	    <tr>
 	      <td colspan="2" align="center"><input type="submit" value="Отправить"></td>
@@ -221,7 +250,7 @@
 	  <table>
 	    <tr>
 	      <td>Код пополнения:</td>
-	      <td><input type="text" size="15"></td>
+	      <td><input class="code" type="text" size="15"></td>
 	    </tr>
 	    <tr>
 	      <td><input type="submit" value="Отправить"></td>
