@@ -296,6 +296,10 @@
 						<c:if test="${transactionType.equals('INCREASE_ACCOUNT_PAYMENT')}">
 							<spring:message code="label.AccountAddFunds"/>
 						</c:if>
+						<c:if test="${transactionType.equals('INCREASE_ACCOUNT_FROM')}">
+                			Перевод стредств с другого счёта
+               			 <spring:message code="label.AccountAddFunds"/>
+              			</c:if>
 					</td>
             	</tr>
 			</c:forEach>
