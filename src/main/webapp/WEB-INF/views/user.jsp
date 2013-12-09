@@ -4,57 +4,6 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%-- <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title><spring:message code="label.appTitle" /></title>
-</head>
-<body>
-
-	<h2><spring:message code="label.welcomeTitle" /></h2>
-
-	<c:if test="${!empty userProfile}">
-	   <input type="hidden" name="pid" value=${userProfile.getId()} />
-		<h3>
-			<spring:message code="label.profile" />
-		</h3>
-		<table class="data">
-			<tr>
-				<td><spring:message code="label.fullName" /></td>
-				<td>${userProfile.getFullName()}</td>
-			</tr>
-			<tr>
-				<td><spring:message code="label.userName" /></td>
-				<td>${userProfile.getUserName()}</td>
-			</tr>
-			<tr>
-				<td><spring:message code="label.email" /></td>
-				<td>${userProfile.getEmail()}</td>
-			</tr>
-			<tr>
-				<td><spring:message code="label.telephone" /></td>
-				<td>${userProfile.getPhone()}</td>
-			</tr>
-		</table>
-	</c:if>
-
-	<br />
-	<br />
-	<!-- <td><a href="change/${user.id}"><spring:message code="label.changeProfile" /></a></td>-->
-
-	<a href="<c:url value="/logout" />"> <spring:message
-			code="label.logout" /></a>
-
-	<a href="<c:url value="/payment/service" />"> 
-	   <spring:message code="label.PaymentService" />
-	</a>
-	<a href="<c:url value="/payment/account" />"> 
-		<spring:message code="label.PaymentHuman" />
-	</a>
-</body>
-</html> --%>
-
-
 <html>
   <head>
     <meta http-equiv="Content-Language" content="ru">
@@ -91,9 +40,38 @@
       zoom:1;
       }
     </style>
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
+        $(".code").keyup(function(e) { //run this on account numbers and fill code
+            /*keycodes for numbers,ctrl,shift,alt,tab,shift-tab,PgUp,PgDn,Ins,Home,End,enter,backspace*/
+            var pattern = /^(4[8-9]|5[0-8]|8|9|13|16|17|18|91|3[3-9]|45|40)$/;
+            var is_number = pattern.test(String(e.which));
+            // remove chars if they're unappropriate or number is too long
+            if (!is_number || $(this).val().length >= 16) {
+                var value = $(this).val()
+                $(this).val(value.substr(0,value.length -1) );
+            }
+        });
+        $(".summ").keyup(function(e) { // this is only for money sum
+            /*keycodes for numbers,ctrl,shift,alt,tab,shift-tab,PgUp,PgDn,Ins,Home,End,enter,backspace,dot*/
+            var pattern = /^(4[8-9]|5[0-8]|8|9|13|16|17|18|91|3[3-9]|45|40|190)$/;
+            var is_number_and_dot = pattern.test(String(e.which));
+            // if we see dot in string, measure how far it is from end
+            if ($(this).val().indexOf('.') >= 0 ){
+                var is_dot_present = $(this).val().indexOf('.');
+                var distance_from_dot = $(this).val().length - $(this).val().indexOf('.');
+            } else {
+                var is_dot_present = false;
+                var distance_from_dot = false;
+            }
+            // remove chars if they're unappropriate or number tolreance is too big
+            // or number is too long
+            if (!is_number_and_dot || distance_from_dot > 3 || $(this).val().length >= 8) {
+                var value = $(this).val()
+                $(this).val(value.substr(0,value.length -1) );
+            }
+        });
         $("form").submit(function (e){
             $(this).find('input, textarea').each(function() {
                 if ( $(this).val() == null || $(this).val() == "" ) {
@@ -236,11 +214,11 @@
             </tr>
             <tr>
               <td><spring:message code="label.accountNumber"/></td>
-              <td><input type="text" size="15" name="number"></td>
+              <td><input class="code" type="text" size="15" name="number"></td>
             </tr>
             <tr>
               <td><spring:message code="label.money"/></td>
-              <td><input type="text" size="10" name="money"></td>
+              <td><input class="summ" type="text" size="10" name="money"></td>
             </tr>
             <tr>
               <td colspan="2" align="center"><input type="submit" value="Отправить"></td>
@@ -266,11 +244,11 @@
           <table>
             <tr>
               <td><spring:message code="label.accountNumber"/></td>
-              <td><input type="text" size="15" name="account"></td>
+              <td><input class="code" type="text" size="15" name="account"></td>
             </tr>
             <tr>
               <td><spring:message code="label.money"/></td>
-              <td><input type="text" size="10" name="money"></td>
+              <td><input class="summ" type="text" size="10" name="money"></td>
             </tr>
             <tr>
               <td colspan="2" align="center"><input type="submit" value="Отправить"></td>
@@ -334,7 +312,7 @@
           <table>
             <tr>
               <td><spring:message code="label.CodeaddFunds"/></td>
-              <td><input type="text" size="15" name="money"></td>
+              <td><input class="code" type="text" size="15" name="money"></td>
             </tr>
             <tr>
               <td><input type="submit" value="Отправить"></td>

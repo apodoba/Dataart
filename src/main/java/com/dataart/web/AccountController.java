@@ -39,7 +39,13 @@ public class AccountController {
 	
     @RequestMapping(value = "/moveBalance/Service", method = RequestMethod.POST)
     public String moveBalanceToService(@ModelAttribute("money") Double money, @ModelAttribute("number") String number) {
-    	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0 && Integer.parseInt(number)>0){
+    	int accountNumber;
+    	try{
+    		accountNumber = Integer.parseInt(number);
+    	}catch (NumberFormatException e){
+    		return "redirect:/payment/service?error=Wrong value of sum or account number";
+    	}
+    	if(userService.getLoginUser().getAccount().getBalance() >= money && money > 0 && accountNumber>0){
     		String description = context.getParameter("service") +" "+ number;
     		accountService.payForService(userService.getLoginUser(), money, description);
     	}else{
