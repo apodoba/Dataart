@@ -50,13 +50,18 @@
       else { $(this).css("outline", "none"); };
   
         });
-    });
-      });
-      </script>
+   });
+     });
+    </script>
     <title><spring:message code="label.appTitle" /></title>
   </head>
   <body>
     <div id="login_container">
+    <c:if test="${!empty sessionScope[\"SPRING_SECURITY_CONTEXT\"]}">
+		<%
+    		response.sendRedirect(request.getContextPath()+"/index");
+		%>
+	</c:if>
      <img src="<%= request.getContextPath() %>/images/logo_big.png"><br><br>
     <c:if test="${not empty param.error}">
 		<font color="red"> <spring:message code="label.loginError" />
