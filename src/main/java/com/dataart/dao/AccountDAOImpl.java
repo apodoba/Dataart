@@ -43,7 +43,7 @@ public class AccountDAOImpl implements AccountDAO {
     public List<Transaction> getTransactions(Account account){
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Transaction.class);
 		criteria.add(Restrictions.eq("account", account));
-		criteria.addOrder(Order.asc("date"));
+		criteria.addOrder(Order.desc("date"));
 		return  (List<Transaction>) criteria.list();
     }
 
