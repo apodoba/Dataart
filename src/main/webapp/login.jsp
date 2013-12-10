@@ -60,7 +60,6 @@
      <img src="<%= request.getContextPath() %>/images/logo_big.png"><br><br>
     <c:if test="${not empty param.error}">
 		<font color="red"> <spring:message code="label.loginError" />
-			Неправильно введен логин или пароль
 		</font>
 	</c:if>
       <form action="<c:url value="/j_spring_security_check" />" method="POST">
@@ -69,8 +68,8 @@
         <br>
         <spring:message code="label.password" /><br>
         <input type="password" name="j_password"><br>
-        <input type="submit" value="Login">
-        <input type="reset" value="Reset" />
+        <input type="submit" value="<spring:message code="label.Input" />">
+        <input type="reset" value="<spring:message code="label.Reset" />" />
         <br><br>
       </form>
     </div>
