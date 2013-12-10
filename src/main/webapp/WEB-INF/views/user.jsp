@@ -44,7 +44,7 @@
     $(document).ready(function() {
 	$(".code").keyup(function(e) { //run this on account numbers and fill code
 	    /*keycodes for numbers,ctrl,shift,alt,tab,shift-tab,PgUp,PgDn,Ins,Home,End,enter,backspace*/
-	    var pattern = /^(4[8-9]|5[0-8]|8|9|13|16|17|18|91|3[3-9]|45|40)$/;
+	    var pattern = /^(9[6-9]|10[0-5]|4[8-9]|5[0-8]|8|9|13|16|17|18|91|3[3-9]|45|40)$/;
 	    var is_number = pattern.test(String(e.which));
 	    // remove chars if they're unappropriate or number is too long
 	    if (!is_number || $(this).val().length >= 16) {
@@ -54,7 +54,7 @@
 	});
 	$(".summ").keyup(function(e) { // this is only for money sum
 	    /*keycodes for numbers,ctrl,shift,alt,tab,shift-tab,PgUp,PgDn,Ins,Home,End,enter,backspace,dot*/
-	    var pattern = /^(4[8-9]|5[0-8]|8|9|13|16|17|18|91|3[3-9]|45|40|190)$/;
+	    var pattern = /^(9[6-9]|10[0-5]|4[8-9]|5[0-8]|8|9|13|16|17|18|91|3[3-9]|45|40|190|110)$/;
 	    var is_number_and_dot = pattern.test(String(e.which));
 	    // if we see dot in string, measure how far it is from end
 	    if ($(this).val().indexOf('.') >= 0 ){
